@@ -12,6 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { getCoinMarket } from "../stores/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
+import { HeaderTab } from "../components";
 
 const Home = ({ getCoinMarket, coins }) => {
   useFocusEffect(
@@ -24,6 +25,11 @@ const Home = ({ getCoinMarket, coins }) => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View>
         {/* Header section */}
+        <View>
+          <HeaderTab
+            title={"Home"}
+          />
+        </View>
 
         <View>
           <Text>
@@ -52,8 +58,8 @@ const Home = ({ getCoinMarket, coins }) => {
               item.price_change_percentage_24h == 0
                 ? COLORS.lightGray3
                 : item.price_change_percentage_24h > 0
-                ? COLORS.lightGreen
-                : COLORS.red;
+                  ? COLORS.green
+                  : COLORS.red;
 
             return (
               <TouchableOpacity

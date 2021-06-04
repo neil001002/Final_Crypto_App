@@ -1,3 +1,8 @@
+import HeaderTab from "./HeaderTab";
 import TabIcon from "./TabIcon";
 
-export { TabIcon };
+
+export {
+    TabIcon,
+    HeaderTab,
+};
