@@ -8,18 +8,20 @@ import {
   ScrollView,
   RefreshControl
 } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { getCoinMarket } from "../stores/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab } from "../components";
 import { LineChart } from "react-native-chart-kit";
+import detailCoin from "./detailCoin";
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
 const Market = ({ getCoinMarket, coins }) => {
+  const navigation = useNavigation();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -35,11 +37,13 @@ const Market = ({ getCoinMarket, coins }) => {
   }, []);
 
   // to toast coin details
-  function toast({ item }) {
-    return (
-      alert(item.name + item.symbol)
-    )
-  }
+  // function toast({ item }) {
+  //   return (
+  //     <View>
+  //       <Text>{item.name}</Text>
+  //     </View>
+  //   )
+  // }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} refreshControl={
@@ -87,7 +91,7 @@ const Market = ({ getCoinMarket, coins }) => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onPress={() => { toast({ item }) }}
+                onPress={() => navigation.navigate('detailCoin', { item })}
               >
                 {/* Logo */}
                 <View

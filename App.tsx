@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./stores/rootReducer";
 
 import Tabs from "./navigation/tabs";
+import { detailCoin } from "./screens";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const App = () => {
           initialRouteName={"MainLayout"}
         >
           <Stack.Screen name="MainLayout" component={Tabs} />
+          <Stack.Screen name="detailCoin" component={detailCoin} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
