@@ -10,11 +10,9 @@ import {
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
-import { getCoinMarket } from "../stores/marketActions";
+import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab } from "../components";
-import { LineChart } from "react-native-chart-kit";
-import detailCoin from "./detailCoin";
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -35,15 +33,6 @@ const Market = ({ getCoinMarket, coins }) => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   }, []);
-
-  // to toast coin details
-  // function toast({ item }) {
-  //   return (
-  //     <View>
-  //       <Text>{item.name}</Text>
-  //     </View>
-  //   )
-  // }
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} refreshControl={
@@ -91,7 +80,17 @@ const Market = ({ getCoinMarket, coins }) => {
                   alignItems: "center",
                   justifyContent: "center",
                 }}
-                onPress={() => navigation.navigate('detailCoin', { item })}
+                onPress={() => navigation.navigate("CoinDetailScreen", {
+                  coin: {
+                    image: item.image,
+                    name: item.name,
+                    price: item.current_price,
+                    marketCap: item.market_cap,
+                    marketCapRank: item.market_cap_rank,
+                    sevenDayChart: item.sparkline_in_7d.price,
+                    color: priceColor
+                  }
+                })}
               >
                 {/* Logo */}
                 <View
@@ -110,43 +109,6 @@ const Market = ({ getCoinMarket, coins }) => {
                 <View style={{ flex: 1 }}>
                   <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
                 </View>
-
-                {/* Chart */}
-                {/* <View
-                  style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    alignSelf: 'flex-start',
-                    backgroundColor: COLORS.white
-                  }}
-                >
-                  <LineChart
-                    withVerticalLabels={false}
-                    withHorizontalLabels={false}
-                    withDots={false}
-                    withInnerLines={false}
-                    withVerticalLines={false}
-                    withOuterLines={false}
-                    data={{
-                      datasets: [
-                        {
-                          data: item.sparkline_in_7d.price
-                        }
-                      ]
-                    }}
-                    width={100}
-                    height={60}
-                    chartConfig={{
-                      backgroundGradientFrom: "#fb8c00",
-                      backgroundGradientTo: COLORS.white,
-                      color: () => priceColor
-                    }}
-                    bezier
-                    style={{
-                      paddingRight: 0,
-                    }}
-                  />
-                </View> */}
 
                 {/* Figures */}
 

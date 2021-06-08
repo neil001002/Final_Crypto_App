@@ -10,7 +10,7 @@ import {
 import { useFocusEffect } from "@react-navigation/native";
 
 import { connect } from "react-redux";
-import { getCoinMarket } from "../stores/marketActions";
+import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab } from "../components";
 
