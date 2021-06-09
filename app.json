@@ -4,9 +4,9 @@
     "slug": "Final_Crypto_App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/home.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/briefcase.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/profile.png",
         "backgroundColor": "#FFFFFF"
       }
     },
