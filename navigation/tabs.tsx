@@ -1,8 +1,7 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home, Search, Market, Settings, News } from "../screens";
+import { Home, Market, Settings, NewsScreen } from "../screens";
 import { TabIcon } from "../components";
 import { COLORS, icons } from "../constants";
 
@@ -41,23 +40,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarIcon: ({ focused }) => {
-            return (
-              <TabIcon
-                focused={focused}
-                icon={icons.briefcase}
-                label="Search"
-              />
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="News"
-        component={News}
+        name="NewsScreen"
+        component={NewsScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

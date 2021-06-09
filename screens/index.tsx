@@ -1,8 +1,15 @@
 import Home from "./Home";
-import Search from "./Search";
 import Market from "./Market";
 import Settings from "./Settings";
-import News from "./news/News";
 import CoinDetailScreen from "./CoinDetailScreen";
+import NewsScreen from "./NewsScreen";
+import Webview from "./Webview";
 
-export { Home, Search, Market, Settings, News, CoinDetailScreen };
+export {
+  Home,
+  Market,
+  Settings,
+  CoinDetailScreen,
+  NewsScreen,
+  Webview,
+};

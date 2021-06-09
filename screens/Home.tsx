@@ -26,17 +26,12 @@ const Home = ({ getCoinMarket, coins }) => {
       <View>
         {/* Header section */}
         <View>
-          <HeaderTab
-            title={"Home"}
-          />
+          <HeaderTab title={"Home"} />
         </View>
 
-        <View>
-          <Text>
-            This will be the Header Section. It will be used for top news and
-            for displaying global crypto data
-          </Text>
-        </View>
+        {/* Global crypto data */}
+
+        {/* Top News HorizontalList */}
 
         {/* Top Cryptocurrency */}
         <FlatList
@@ -58,8 +53,8 @@ const Home = ({ getCoinMarket, coins }) => {
               item.price_change_percentage_24h == 0
                 ? COLORS.lightGray3
                 : item.price_change_percentage_24h > 0
-                  ? COLORS.green
-                  : COLORS.red;
+                ? COLORS.green
+                : COLORS.red;
 
             return (
               <TouchableOpacity

@@ -1,11 +1,8 @@
-import CoinChart from "./coinDetailComponents/coinChart";
+import CoinChart from "./coinDetailComponents/CoinChart";
 import CoinDetails from "./coinDetailComponents/CoinDetails";
 import HeaderTab from "./HeaderTab";
 import TabIcon from "./TabIcon";
+import NewsCard from "./NewsCard"
 
-export {
-    TabIcon,
-    HeaderTab,
-    CoinDetails,
-    CoinChart
-};
+
+export { TabIcon, HeaderTab, CoinDetails, CoinChart, NewsCard };
