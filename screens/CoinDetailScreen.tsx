@@ -1,13 +1,13 @@
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React from 'react'
-import { View } from 'react-native'
+import { Button, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
-import { CoinChart, CoinDetails } from '../components';
+import { CoinChart, CoinDetails, HeaderTab } from '../components';
 import { getCoinChart } from '../stores/chartAPI/chartActions';
 
 const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
-
+    const navigation = useNavigation();
     const ID = route.params.coin.id
 
     useFocusEffect(
@@ -18,6 +18,15 @@ const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
     return (
         <SafeAreaView>
             <View>
+                <HeaderTab
+                    title={`${route.params.coin.id}`.toUpperCase()}
+                />
+                <Button
+                    title="Back"
+                    onPress={() => {
+                        navigation.goBack();
+                    }}
+                />
                 {/* Coin details */}
                 <CoinDetails
                     image={{ uri: route.params.coin.image }}
@@ -28,11 +37,14 @@ const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
                 />
 
                 {/* Chart */}
+
                 <CoinChart
                     // chartData={route.params.coin.sevenDayChart}
-                    chartData={coins.prices}
+                    title={"7 day "}
+                    chartData={route.params.coin.sevenDayChart}
                     colorData={route.params.coin.color}
                 />
+
 
             </View>
         </SafeAreaView>

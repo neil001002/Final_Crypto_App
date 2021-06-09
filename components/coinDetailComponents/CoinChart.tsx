@@ -2,15 +2,15 @@ import React from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import { LineChart } from "react-native-chart-kit";
 import { FONTS, COLORS } from '../../constants';
-import Time from '../news_components/news_time';
 
-const CoinChart = ({ chartData, colorData }) => {
+const CoinChart = ({ title, chartData, colorData }) => {
     return (
         <View>
+            <Text style={{ ...FONTS.largeTitle }}>{title}</Text>
             <LineChart
                 withVerticalLabels={true}
                 withHorizontalLabels={true}
-                withDots={true}
+                withDots={false}
                 withInnerLines={false}
                 withVerticalLines={false}
                 withOuterLines={false}
