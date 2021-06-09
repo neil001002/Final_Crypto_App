@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
+import { HeaderTab } from "../components";
 
 const Settings = () => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <ScrollView>
+      <View style={{ flex: 1 }}>
+        <HeaderTab title={"Settings"} />
+      </View>
+
+      <Text>hi there</Text>
+    </ScrollView>
   );
 };
 

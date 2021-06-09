@@ -18,15 +18,17 @@ const NewsCard = ({ item }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Webview", {url: item.url})}>
-      <View style={styles.cardView}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.author}>{item.source.name}</Text>
-        <Image style={styles.image} source={{ uri: item.urlToImage }} />
-        <Text style={styles.author}> {time} </Text>
+    <View style={styles.cardView}>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.author}>{item.source.name}</Text>
+      <Image style={styles.image} source={{ uri: item.urlToImage }} />
+      <Text style={styles.author}> {time} </Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Webview", { url: item.url })}
+      >
         <Text style={styles.description}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

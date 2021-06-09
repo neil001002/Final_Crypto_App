@@ -5,10 +5,7 @@ import { WebView } from "react-native-webview";
 
 const Webview = ({ route }) => {
   return (
-    <View>
-      <View>
-        <HeaderTab title={"Webview"} />
-      </View>
+    <View style={{ flex: 1 }}>
       <WebView source={{ uri: route.params.url }} />
     </View>
   );

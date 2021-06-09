@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import { HeaderTab } from "../components";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
@@ -11,12 +11,13 @@ import { COLORS } from "../constants";
 const Tab = createMaterialTopTabNavigator();
 
 //Top tabs navigation for new tabs
-function NewsScreen() {
+const NewsScreen = () => {
   return (
     <>
       <View>
         <HeaderTab title={"News"} />
       </View>
+
       <Tab.Navigator
         tabBarOptions={{
           style: {
@@ -33,6 +34,6 @@ function NewsScreen() {
       </Tab.Navigator>
     </>
   );
-}
+};
 
 export default NewsScreen;
