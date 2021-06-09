@@ -23,14 +23,15 @@ export const getCoinChartFailure = (error) => ({
 });
 
 export function getCoinChart(
-    currency = "usd",
-    id = "bitcoin",
-    days = "7"
+
+    { ID }
+
 ) {
+
     return (dispatch) => {
         dispatch(getCoinChartBegin());
 
-        let apiUrl = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`;
+        let apiUrl = `https://api.coingecko.com/api/v3/coins/${ID}/market_chart?vs_currency=usd&days=1`;
 
         return axios({
             url: apiUrl,
@@ -41,7 +42,7 @@ export function getCoinChart(
         })
             .then((response) => {
                 console.log("getCoinChart");
-                console.log(response);
+                console.log(response.data);
                 if (response.status == 200) {
                     dispatch(getCoinChartSuccess(response.data));
                 } else {

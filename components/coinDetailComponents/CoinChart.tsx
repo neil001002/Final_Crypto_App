@@ -1,15 +1,15 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import { LineChart } from "react-native-chart-kit";
 import { FONTS, COLORS } from '../../constants';
 
-const CoinChart = ({ chartData, colorData }) => {
-    const chart = { chartData }
+const CoinChart = ({ title, chartData, colorData }) => {
     return (
         <View>
+            <Text style={{ ...FONTS.largeTitle }}>{title}</Text>
             <LineChart
-                withVerticalLabels={false}
-                withHorizontalLabels={false}
+                withVerticalLabels={true}
+                withHorizontalLabels={true}
                 withDots={false}
                 withInnerLines={false}
                 withVerticalLines={false}
@@ -17,12 +17,13 @@ const CoinChart = ({ chartData, colorData }) => {
                 data={{
                     datasets: [
                         {
-                            data: chart
+                            data: chartData
                         }
                     ]
                 }}
-                width={300}
-                height={150}
+                width={Dimensions.get("window").width} // from react-native
+                height={220}
+                yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
                     backgroundGradientFrom: "#fb8c00",
                     backgroundGradientTo: COLORS.white,
