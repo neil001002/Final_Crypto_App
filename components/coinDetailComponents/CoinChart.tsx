@@ -1,28 +1,29 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import { LineChart } from "react-native-chart-kit";
 import { FONTS, COLORS } from '../../constants';
+import Time from '../news_components/news_time';
 
 const CoinChart = ({ chartData, colorData }) => {
-    const chart = { chartData }
     return (
         <View>
             <LineChart
-                withVerticalLabels={false}
-                withHorizontalLabels={false}
-                withDots={false}
+                withVerticalLabels={true}
+                withHorizontalLabels={true}
+                withDots={true}
                 withInnerLines={false}
                 withVerticalLines={false}
                 withOuterLines={false}
                 data={{
                     datasets: [
                         {
-                            data: chart
+                            data: chartData
                         }
                     ]
                 }}
-                width={300}
-                height={150}
+                width={Dimensions.get("window").width} // from react-native
+                height={220}
+                yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
                     backgroundGradientFrom: "#fb8c00",
                     backgroundGradientTo: COLORS.white,

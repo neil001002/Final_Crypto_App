@@ -82,6 +82,7 @@ const Market = ({ getCoinMarket, coins }) => {
                 }}
                 onPress={() => navigation.navigate("CoinDetailScreen", {
                   coin: {
+                    id: item.id,
                     image: item.image,
                     name: item.name,
                     price: item.current_price,

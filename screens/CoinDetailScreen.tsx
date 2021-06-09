@@ -7,14 +7,18 @@ import { CoinChart, CoinDetails } from '../components';
 import { getCoinChart } from '../stores/chartAPI/chartActions';
 
 const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
+
+    const ID = route.params.coin.id
+
     useFocusEffect(
         React.useCallback(() => {
-            getCoinChart();
+            getCoinChart({ ID });
         }, [])
     )
     return (
         <SafeAreaView>
             <View>
+                {/* Coin details */}
                 <CoinDetails
                     image={{ uri: route.params.coin.image }}
                     name={route.params.coin.name}
@@ -22,8 +26,11 @@ const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
                     marketCap={route.params.coin.marketCap}
                     marketCapRank={route.params.coin.marketCapRank}
                 />
+
+                {/* Chart */}
                 <CoinChart
-                    chartData={route.params.coin.sevenDayChart}
+                    // chartData={route.params.coin.sevenDayChart}
+                    chartData={coins.prices}
                     colorData={route.params.coin.color}
                 />
 
@@ -34,22 +41,18 @@ const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
 
 function mapStateToProps(state) {
     return {
-        coins: state.marketReducer.coins,
+        coins: state.chartReducer.coins,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getCoinChart: (
-            currency,
-            id,
-            days,
+            ID,
         ) => {
             return dispatch(
                 getCoinChart(
-                    currency,
-                    id,
-                    days,
+                    ID,
                 )
             );
         },
