@@ -12,7 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
-import { HeaderTab } from "../components";
+import { HeaderTab, HomeNewsCard } from "../components";
 
 const Home = ({ getCoinMarket, coins }) => {
   useFocusEffect(
@@ -32,6 +32,9 @@ const Home = ({ getCoinMarket, coins }) => {
         {/* Global crypto data */}
 
         {/* Top News HorizontalList */}
+        <View>
+          <HomeNewsCard />
+        </View>
 
         {/* Top Cryptocurrency */}
         <FlatList

@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
     // borderWidth: 0.3,
   },
   title: {
-    marginHorizontal: width * 0.05,
-    marginVertical: width * 0.03,
+    // marginHorizontal: width * 0.05,
+    // marginVertical: width * 0.03,
     color: "black",
     fontSize: 20,
     fontWeight: "bold",
