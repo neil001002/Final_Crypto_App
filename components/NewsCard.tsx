@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import moment from "moment";
@@ -17,11 +18,13 @@ const NewsCard = ({ item }) => {
 
   const navigation = useNavigation();
 
+  const defaultImage = require("../assets/icons/briefcase.png")
+
   return (
     <View style={styles.cardView}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.author}>{item.source.name}</Text>
-      <Image style={styles.image} source={{ uri: item.urlToImage }} />
+      <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
       <Text style={styles.author}> {time} </Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("Webview", { url: item.url })}
@@ -45,8 +48,8 @@ const styles = StyleSheet.create({
     // borderWidth: 0.3,
   },
   title: {
-    // marginHorizontal: width * 0.05,
-    // marginVertical: width * 0.03,
+    marginHorizontal: width * 0.05,
+    marginVertical: width * 0.03,
     color: "black",
     fontSize: 20,
     fontWeight: "bold",

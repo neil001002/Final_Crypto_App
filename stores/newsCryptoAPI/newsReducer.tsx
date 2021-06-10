@@ -1,24 +1,24 @@
-import * as chartActions from "./chartActions";
+import * as newsActions from "./newsActions"
 
 const initialState = {
-    coinschart: [],
+    coinsnews: [],
     error: null,
     loading: false,
 };
 
-const chartReducer = (state = initialState, action) => {
+const newsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case chartActions.GET_COIN_CHART_BEGIN:
+        case newsActions.GET_COIN_NEWS_BEGIN:
             return {
                 ...state,
                 loading: true,
             };
-        case chartActions.GET_COIN_CHART_SUCCESS:
+        case newsActions.GET_COIN_NEWS_SUCCESS:
             return {
                 ...state,
-                coinschart: action.payload.coinschart,
+                coinsnews: action.payload.coinsnews,
             };
-        case chartActions.GET_COIN_CHART_FAILURE:
+        case newsActions.GET_COIN_NEWS_FAILURE:
             return {
                 ...state,
                 error: action.payload.error,
@@ -28,4 +28,6 @@ const chartReducer = (state = initialState, action) => {
     }
 };
 
-export default chartReducer;
+export default newsReducer;
+
+
