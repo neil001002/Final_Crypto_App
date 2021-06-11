@@ -27,7 +27,7 @@ export function getCoinMarket(
   orderBy = "market_cap_desc",
   sparkline = true,
   priceChangePerc = "7d",
-  perPage = 10,
+  perPage = 50,
   page = 1
 ) {
   return (dispatch) => {

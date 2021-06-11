@@ -12,9 +12,9 @@ export const getCoinChartBegin = () => ({
     type: GET_COIN_CHART_BEGIN,
 });
 
-export const getCoinChartSuccess = (coins) => ({
+export const getCoinChartSuccess = (coinschart) => ({
     type: GET_COIN_CHART_SUCCESS,
-    payload: { coins },
+    payload: { coinschart },
 });
 
 export const getCoinChartFailure = (error) => ({

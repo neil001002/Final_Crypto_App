@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
 import { HeaderTab } from "../components";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
@@ -14,10 +14,10 @@ const Tab = createMaterialTopTabNavigator();
 const NewsScreen = () => {
   return (
     <>
+      <StatusBar hidden />
       <View>
         <HeaderTab title={"News"} />
       </View>
-
       <Tab.Navigator
         tabBarOptions={{
           style: {

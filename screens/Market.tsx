@@ -6,13 +6,15 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  StatusBar
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab } from "../components";
+import GlobalData from "../components/GlobalData";
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -20,7 +22,6 @@ const wait = (timeout) => {
 
 const Market = ({ getCoinMarket, coins }) => {
   const navigation = useNavigation();
-
   useFocusEffect(
     React.useCallback(() => {
       getCoinMarket();
@@ -35,129 +36,170 @@ const Market = ({ getCoinMarket, coins }) => {
   }, []);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} refreshControl={
-      <RefreshControl
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-      />
-    }>
-      <View style={{ backgroundColor: COLORS.white }}>
-        {/* Header section */}
-        <View>
-          <HeaderTab
-            title={"Market"}
-          />
-        </View>
+    <>
+      {/* Header section */}
+      < View
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 1,
+        }}
 
-        {/* Top Cryptocurrency */}
-        <FlatList
-          data={coins}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{
-            marginTop: 30,
-            paddingHorizontal: SIZES.padding,
-          }}
-          ListHeaderComponent={
-            <View style={{ marginBottom: SIZES.radius }}>
-              <Text style={{ color: COLORS.black, ...FONTS.h3, fontSize: 18 }}>
-                Top crypto currency
-              </Text>
-            </View>
-          }
-          renderItem={({ item }) => {
-            let priceColor =
-              item.price_change_percentage_24h == 0
-                ? COLORS.lightGray3
-                : item.price_change_percentage_24h > 0
-                  ? COLORS.green
-                  : COLORS.red;
+      >
+        <HeaderTab
+          title={"Market"}
+        />
+      </View >
+      <StatusBar hidden />
+      <ScrollView showsVerticalScrollIndicator={false} refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
+      }>
+        <View style={{
+          position: 'relative',
+          backgroundColor: "#EBEBEB",
+          marginTop: 50,
+        }}>
 
-            return (
-              <TouchableOpacity
-                style={{
-                  height: 55,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                onPress={() => navigation.navigate("CoinDetailScreen", {
-                  coin: {
-                    id: item.id,
-                    image: item.image,
-                    name: item.name,
-                    price: item.current_price,
-                    marketCap: item.market_cap,
-                    marketCapRank: item.market_cap_rank,
-                    sevenDayChart: item.sparkline_in_7d.price,
-                    color: priceColor
-                  }
-                })}
-              >
-                {/* Logo */}
-                <View
-                  style={{
-                    width: 35,
-                  }}
-                >
-                  <Image
-                    source={{ uri: item.image }}
-                    style={{ height: 20, width: 20 }}
-                  />
-                </View>
+          {/* Global data */}
+          <View
+            style={{
+              position: "relative",
+              backgroundColor: "#343333",
+              height: 40,
+            }}
+          >
+            <GlobalData />
+          </View>
 
-                {/* Name */}
+          {/* Top Cryptocurrency */}
+          <View
+            style={{
+              position: "relative",
+              marginVertical: 10,
+              marginHorizontal: 10,
+              backgroundColor: "#FFFFFF",
+              borderRadius: 5,
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowOffset: {
+                width: 4,
+                height: 4,
+              },
+              shadowOpacity: 4,
+              shadowRadius: 15,
 
-                <View style={{ flex: 1 }}>
-                  <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
-                </View>
+              elevation: 12,
+            }}
+          >
+            <FlatList
+              data={coins}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={{
+                paddingVertical: SIZES.padding,
+                paddingHorizontal: SIZES.padding,
+              }}
 
-                {/* Figures */}
+              renderItem={({ item }) => {
+                let priceColor =
+                  item.price_change_percentage_24h == 0
+                    ? COLORS.lightGray3
+                    : item.price_change_percentage_24h > 0
+                      ? COLORS.green
+                      : COLORS.red;
 
-                <View>
-                  <Text style={{ textAlign: "right", ...FONTS.h4 }}>
-                    $ {item.current_price}
-                  </Text>
-
-                  <View
+                return (
+                  <TouchableOpacity
                     style={{
+                      height: 55,
                       flexDirection: "row",
                       alignItems: "center",
-                      justifyContent: "flex-end",
+                      justifyContent: "center",
                     }}
+                    onPress={() => navigation.navigate("CoinDetailScreen", {
+                      coin: {
+                        id: item.id,
+                        image: item.image,
+                        name: item.name,
+                        price: item.current_price,
+                        marketCap: item.market_cap,
+                        marketCapRank: item.market_cap_rank,
+                        sevenDayChart: item.sparkline_in_7d.price,
+                        color: priceColor
+                      }
+                    })}
                   >
-                    {item.price_change_percentage_24h != 0 && (
-                      <Image
-                        source={icons.upArrow}
-                        style={{
-                          height: 10,
-                          width: 10,
-                          tintColor: priceColor,
-                          transform:
-                            item.price_change_percentage_24h > 0
-                              ? [{ rotate: "0deg" }]
-                              : [{ rotate: "180deg" }],
-                        }}
-                      />
-                    )}
-
-                    <Text
+                    {/* Logo */}
+                    <View
                       style={{
-                        marginLeft: 5,
-                        color: priceColor,
-                        ...FONTS.body5,
-                        lineHeight: 15,
+                        width: 35,
                       }}
                     >
-                      {item.price_change_percentage_24h.toFixed(2)}%
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </View>
-    </ScrollView>
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{ height: 25, width: 25 }}
+                      />
+                    </View>
+
+                    {/* Name */}
+
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
+                      <Text style={{ ...FONTS.body5 }}>{item.symbol.toUpperCase()}</Text>
+                    </View>
+
+                    {/* Figures */}
+
+                    <View>
+                      <Text style={{ textAlign: "right", ...FONTS.h4 }}>
+                        $ {item.current_price}
+                      </Text>
+
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-end",
+                        }}
+                      >
+                        {item.price_change_percentage_24h != 0 && (
+                          <Image
+                            source={icons.upArrow}
+                            style={{
+                              height: 10,
+                              width: 10,
+                              tintColor: priceColor,
+                              transform:
+                                item.price_change_percentage_24h > 0
+                                  ? [{ rotate: "0deg" }]
+                                  : [{ rotate: "180deg" }],
+                            }}
+                          />
+                        )}
+
+                        <Text
+                          style={{
+                            marginLeft: 5,
+                            color: priceColor,
+                            ...FONTS.body5,
+                            lineHeight: 15,
+                          }}
+                        >
+                          {item.price_change_percentage_24h.toFixed(2)}%
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </>
   );
 };
 

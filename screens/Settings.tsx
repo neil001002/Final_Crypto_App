@@ -1,17 +1,29 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { HeaderTab } from "../components";
+import React, { useState } from "react";
+import { View, Switch, StyleSheet } from "react-native";
 
-const Settings = () => {
+const App = () => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
   return (
-    <ScrollView>
-      <View style={{ flex: 1 }}>
-        <HeaderTab title={"Settings"} />
-      </View>
-
-      <Text>hi there</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+    </View>
   );
-};
+}
 
-export default Settings;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+export default App;

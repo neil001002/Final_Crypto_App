@@ -1,22 +1,16 @@
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { Button, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { connect } from 'react-redux';
-import { CoinChart, CoinDetails, HeaderTab } from '../components';
-import { getCoinChart } from '../stores/chartAPI/chartActions';
+import { ScrollView } from 'react-native-gesture-handler';
+import { } from 'react-native-safe-area-context';
+import { CoinChart, CoinDetailNews, CoinDetails, HeaderTab } from '../components';
 
-const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
+const CoinDetailScreen = ({ route }) => {
     const navigation = useNavigation();
     const ID = route.params.coin.id
 
-    useFocusEffect(
-        React.useCallback(() => {
-            getCoinChart({ ID });
-        }, [])
-    )
     return (
-        <SafeAreaView>
+        <ScrollView>
             <View>
                 <HeaderTab
                     title={`${route.params.coin.id}`.toUpperCase()}
@@ -39,36 +33,18 @@ const CoinDetailScreen = ({ route, getCoinChart, coins }) => {
                 {/* Chart */}
 
                 <CoinChart
-                    // chartData={route.params.coin.sevenDayChart}
+                    ID={ID}
                     title={"7 day "}
                     chartData={route.params.coin.sevenDayChart}
                     colorData={route.params.coin.color}
                 />
 
-
+                <CoinDetailNews
+                    ID={`+${ID}`}
+                />
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
-function mapStateToProps(state) {
-    return {
-        coins: state.chartReducer.coins,
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        getCoinChart: (
-            ID,
-        ) => {
-            return dispatch(
-                getCoinChart(
-                    ID,
-                )
-            );
-        },
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CoinDetailScreen);
+export default CoinDetailScreen

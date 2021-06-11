@@ -1,27 +1,20 @@
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { View, FlatList, ScrollView } from "react-native";
-import { HeaderTab, NewsCard } from "../../components";
+import { connect } from "react-redux";
+import { NewsCard } from "../../components";
 import newsAPI from "../../news_api/News";
+import { getCoinNews } from "../../stores/newsCryptoAPI/newsActions";
 
-const Tab1 = () => {
+const Tab1 = ({ getCoinNews, coinsnews }) => {
   const [news, setNews] = useState([]);
 
-  useEffect(() => {
-    getNewsFromAPI();
-  }, []);
-
-  function getNewsFromAPI() {
-    newsAPI
-      .get(
-        "everything?q=crypto&sortBy=publishedAt&language=en&apiKey=f08f0a610915445b89739684b1217bc4"
-      )
-      .then(async function (response) {
-        setNews(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+  useFocusEffect(
+    React.useCallback(() => {
+      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft"
+      getCoinNews({ ID });
+    }, [])
+  );
 
   if (!news) {
     return null;
@@ -30,12 +23,12 @@ const Tab1 = () => {
   return (
     <>
       <ScrollView>
-        <View style={{}}>
+        <View>
           <FlatList
-            data={news.articles}
+            data={coinsnews.articles}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
-              return <NewsCard item={item} />;
+              return <NewsCard item={item} />
             }}
           />
         </View>
@@ -44,4 +37,24 @@ const Tab1 = () => {
   );
 };
 
-export default Tab1;
+function mapStateToProps(state) {
+  return {
+    coinsnews: state.newsReducer.coinsnews,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCoinNews: (
+      ID
+    ) => {
+      return dispatch(
+        getCoinNews(
+          ID
+        )
+      );
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tab1);

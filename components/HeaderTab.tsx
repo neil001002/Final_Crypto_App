@@ -7,9 +7,19 @@ const HeaderTab = ({ title }) => {
         <View
             style={{
                 paddingHorizontal: SIZES.padding,
-                borderBottomLeftRadius: 25,
-                borderBottomRightRadius: 25,
-                backgroundColor: COLORS.white,
+                backgroundColor: "#EBEBEB",
+                height: 50,
+                elevation: 12,
+                shadowColor: "rgba(0, 0, 0, 0.25)",
+                shadowOffset: {
+                    width: 10,
+                    height: 10,
+                },
+                shadowOpacity: 4,
+                shadowRadius: 15,
+                borderBottomStartRadius: 10,
+                borderBottomEndRadius: 10,
+
             }}
         >
             <Text style={{
@@ -17,7 +27,6 @@ const HeaderTab = ({ title }) => {
                 justifyContent: 'center',
                 textAlign: 'center',
                 ...FONTS.largeTitle,
-                paddingTop: 25
             }}>{title}</Text>
         </View>
     )

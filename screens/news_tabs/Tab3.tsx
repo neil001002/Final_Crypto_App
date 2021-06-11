@@ -1,57 +1,62 @@
-// import React, { useState, useEffect } from "react";
-// import { View, FlatList } from "react-native";
-// import newsAPI from "../../news_api/News";
-// import NewsCard from "./NewsCard";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { View, FlatList, ScrollView } from "react-native";
+import { connect } from "react-redux";
+import { NewsCard } from "../../components";
+import newsAPI from "../../news_api/News";
+import { getCoinNews } from "../../stores/newsCryptoAPI/newsActions";
 
-// const Tab3 = () => {
-//   const [news, setNews] = useState([]);
+const Tab3 = ({ getCoinNews, coinsnews }) => {
+  const [news, setNews] = useState([]);
 
-//   useEffect(() => {
-//     getNewsFromAPI();
-//   }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const ID = "ethereum OR eth OR vitalik OR -bitcoin"
+      getCoinNews({ ID });
+    }, [])
+  );
 
-//   function getNewsFromAPI() {
-//     newsAPI
-//       .get(
-//         "everything?q=ethereum&sortBy=publishedAt&language=en&apiKey=f08f0a610915445b89739684b1217bc4"
-//       )
-//       .then(async function (response) {
-//         setNews(response.data);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   }
+  if (!news) {
+    return null;
+  }
 
-//   if (!news) {
-//     return null;
-//   }
-
-//   return (
-//     <View style={{ backgroundColor: "white" }}>
-//       <FlatList
-//         data={news.articles}
-//         keyExtractor={(item, index) => "key" + index}
-//         renderItem={({ item }) => {
-//           return <NewsCard item={item} />;
-//         }}
-//       />
-//     </View>
-//   );
-// };
-
-// export default Tab3;
-
-
-import React from 'react'
-import { View, Text } from 'react-native'
-
-const Tab3 = () => {
   return (
-    <View>
-      <Text>Tab3</Text>
-    </View>
-  )
+    <>
+      <ScrollView>
+        <View style={{}}>
+          <FlatList
+            data={coinsnews.articles}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              return (
+                <NewsCard item={item} />
+              );
+            }}
+          />
+        </View>
+      </ScrollView>
+    </>
+  );
+};
+
+function mapStateToProps(state) {
+  return {
+    coinsnews: state.newsReducer.coinsnews,
+  };
 }
 
-export default Tab3
+function mapDispatchToProps(dispatch) {
+  return {
+    getCoinNews: (
+      ID
+    ) => {
+      return dispatch(
+        getCoinNews(
+          ID
+        )
+      );
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tab3);
