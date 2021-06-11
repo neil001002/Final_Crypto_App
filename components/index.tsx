@@ -5,5 +5,10 @@ import TabIcon from "./TabIcon";
 import NewsCard from "./NewsCard";
 import HomeNewsCard from "./HomeNewsCard";
 import CoinDetailNews from "./coinDetailComponents/CoinDetailNews";
+import HeaderTabIcons from "./HeaderTabIcons";
+import CoinDetailSeconCard from "./coinDetailComponents/CoinDetailSeconCard";
 
-export { TabIcon, HeaderTab, CoinDetails, CoinChart, NewsCard, HomeNewsCard, CoinDetailNews };
+export {
+    TabIcon, HeaderTab, CoinDetails, CoinChart, NewsCard,
+    HomeNewsCard, CoinDetailNews, HeaderTabIcons, CoinDetailSeconCard
+};

@@ -2,11 +2,12 @@ import React from 'react'
 import { Button, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { } from 'react-native-safe-area-context';
-import { CoinChart, CoinDetailNews, CoinDetails, } from '../components';
+import { CoinChart, CoinDetailNews, CoinDetails, CoinDetailSeconCard, } from '../components';
 import HeaderTabIcons from '../components/HeaderTabIcons';
 
 const CoinDetailScreen = ({ route }) => {
     const ID = route.params.coin.id
+    console.log("totalVolume", route.params.coin.totalVolume)
 
     return (
         <>
@@ -37,19 +38,32 @@ const CoinDetailScreen = ({ route }) => {
                         image={{ uri: route.params.coin.image }}
                         name={route.params.coin.name}
                         price={route.params.coin.price}
-                        marketCap={route.params.coin.marketCap}
-                        marketCapRank={route.params.coin.marketCapRank}
+                        priceChangePer={(route.params.coin.priceChangePer).toFixed(2)}
+                        symbol={(route.params.coin.symbol).toUpperCase()}
+                        color={route.params.coin.color}
                     />
 
                     {/* Chart */}
 
                     <CoinChart
                         ID={ID}
-                        title={"7 day "}
                         chartData={route.params.coin.sevenDayChart}
                         colorData={route.params.coin.color}
                     />
 
+                    {/* Coin detail second page */}
+                    <CoinDetailSeconCard
+                        marketCapRank={route.params.coin.marketCapRank}
+                        marketCap={route.params.coin.marketCap}
+                        totalVolume={route.params.coin.totalVolume}
+                        dayHigh={route.params.coin.dayHigh}
+                        dayLow={route.params.coin.dayLow}
+                        marketCapChangeDay={(route.params.coin.marketCapChangeDay)}
+                        marketCapChangeDayPer={route.params.coin.marketCapChangeDayPer}
+                        totalSupply={route.params.coin.totalSupply}
+                    />
+
+                    {/* Coin news */}
                     <CoinDetailNews
                         ID={`+${ID}`}
                     />

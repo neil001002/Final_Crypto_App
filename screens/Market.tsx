@@ -125,10 +125,19 @@ const Market = ({ getCoinMarket, coins }) => {
                         image: item.image,
                         name: item.name,
                         price: item.current_price,
+                        priceChangePer: item.price_change_percentage_24h,
+                        priceChange24h: item.price_change_24h,
+                        symbol: item.symbol,
                         marketCap: item.market_cap,
                         marketCapRank: item.market_cap_rank,
                         sevenDayChart: item.sparkline_in_7d.price,
-                        color: priceColor
+                        color: priceColor,
+                        totalVolume: item.total_volume,
+                        dayHigh: item.high_24h,
+                        dayLow: item.low_24h,
+                        marketCapChangeDay: item.market_cap_change_24h,
+                        marketCapChangeDayPer: item.market_cap_change_percentage_24h,
+                        totalSupply: item.total_supply
                       }
                     })}
                   >

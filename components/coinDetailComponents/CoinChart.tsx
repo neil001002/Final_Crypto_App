@@ -3,10 +3,10 @@ import React from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import { LineChart } from "react-native-chart-kit";
 import { connect } from 'react-redux';
-import { FONTS, COLORS } from '../../constants';
+import { FONTS, COLORS, SIZES } from '../../constants';
 import { getCoinChart } from '../../stores/chartAPI/chartActions';
 
-const CoinChart = ({ ID, title, chartData, colorData, getCoinChart, coinschart }) => {
+const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
 
     useFocusEffect(
         React.useCallback(() => {
@@ -15,7 +15,6 @@ const CoinChart = ({ ID, title, chartData, colorData, getCoinChart, coinschart }
     );
     return (
         <View>
-            <Text style={{ ...FONTS.largeTitle }}>{title}</Text>
             <LineChart
                 withVerticalLabels={true}
                 withHorizontalLabels={true}
@@ -32,31 +31,50 @@ const CoinChart = ({ ID, title, chartData, colorData, getCoinChart, coinschart }
                 }}
 
                 width={Dimensions.get("window").width}  // from react-native
-                height={220}
+                // width={339}
+                height={182}
+                yAxisLabel={"$"}
                 yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
-                    backgroundGradientFrom: "#fb8c00",
-                    backgroundGradientTo: COLORS.white,
+                    backgroundGradientFrom: "#FFFFFF",
+                    backgroundGradientTo: "#FFFFFF",
                     color: () => colorData,
                 }}
                 bezier
                 style={{
-                    paddingRight: 10,
+                    position: "relative",
+                    marginVertical: 10,
+                    marginHorizontal: 10,
+                    marginRight: 20,
+                    backgroundColor: "#FFFFFF",
+                    borderRadius: 5,
+                    shadowColor: "rgba(0, 0, 0, 0.25)",
+                    shadowOffset: {
+                        width: 4,
+                        height: 4,
+                    },
+                    shadowOpacity: 4,
+                    shadowRadius: 15,
+
+                    elevation: 12,
                 }}
             />
             <View style={{
+                marginTop: 3,
+                marginBottom: SIZES.radius,
+                paddingHorizontal: SIZES.padding,
                 flexDirection: 'row',
-                paddingLeft: 10,
+                alignItems: "center",
                 justifyContent: 'space-between'
             }}>
-                <Text>7d</Text>
-                <Text>6d</Text>
-                <Text>5d</Text>
-                <Text>4d</Text>
-                <Text>3d</Text>
-                <Text>2d</Text>
-                <Text>1d</Text>
-                <Text>Now</Text>
+                <Text style={{ fontWeight: "600" }}>7D</Text>
+                <Text style={{ fontWeight: "600" }}>6D</Text>
+                <Text style={{ fontWeight: "600" }}>5D</Text>
+                <Text style={{ fontWeight: "600" }}>4D</Text>
+                <Text style={{ fontWeight: "600" }}>3D</Text>
+                <Text style={{ fontWeight: "600" }}>2D</Text>
+                <Text style={{ fontWeight: "600" }}>1D</Text>
+                <Text style={{ fontWeight: "600" }}>Now</Text>
             </View>
         </View>
     )

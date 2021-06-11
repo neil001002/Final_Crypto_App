@@ -30,11 +30,25 @@ const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
                             onPress={() => navigation.navigate("Webview", { url: item.url })}
                         >
                             <View style={styles.cardView}>
-                                <Text style={styles.title}>{item.title}</Text>
-                                <Text style={styles.author}>{item.source.name}</Text>
-                                <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
-                                <Text style={styles.author}> {moment(item.publishedAt || moment.now()).fromNow()} </Text>
-                                <Text style={styles.description}>{item.description}</Text>
+                                <View
+                                    style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                                >
+
+                                    <View style={{}}>
+                                        <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
+                                    </View>
+
+                                    <View style={{}}>
+
+                                        <Text style={styles.title}>{item.title}</Text>
+                                        <Text style={styles.author}>{item.source.name}</Text>
+                                        <Text style={styles.description}>{item.description}</Text>
+
+                                        <Text style={styles.author}> {moment(item.publishedAt || moment.now()).fromNow()} </Text>
+
+                                    </View>
+                                </View>
+
                             </View>
                         </TouchableOpacity>
                     );
@@ -46,19 +60,23 @@ const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
 
 const styles = StyleSheet.create({
     cardView: {
-        elevation: 2,
-        backgroundColor: "white",
-        margin: width * 0.03,
-        borderRadius: width * 0.05,
-        shadowColor: "#000",
-        shadowOffset: { width: 1, height: 0.5 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3,
-        // borderWidth: 0.3,
+        position: "relative",
+        marginVertical: 10,
+        marginHorizontal: 10,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 5,
+        shadowColor: "rgba(0, 0, 0, 0.25)",
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        shadowOpacity: 4,
+        shadowRadius: 15,
+        elevation: 12,
     },
     title: {
-        marginHorizontal: width * 0.05,
-        marginVertical: width * 0.03,
+        width: 223,
+        height: 46,
         color: "black",
         fontSize: 20,
         fontWeight: "bold",
@@ -76,10 +94,10 @@ const styles = StyleSheet.create({
     //   fontWeight: "bold",
     // },
     image: {
-        height: height / 5,
-        marginLeft: width * 0.05,
-        marginRight: width * 0.05,
-        marginVertical: height * 0.02,
+        width: 150,
+        height: 150,
+        borderBottomLeftRadius: 5,
+        borderTopLeftRadius: 5
     },
     author: {
         marginBottom: width * 0.0,

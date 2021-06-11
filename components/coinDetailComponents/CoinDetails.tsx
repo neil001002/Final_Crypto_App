@@ -1,19 +1,65 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-import { FONTS } from '../../constants'
+import { FONTS, SIZES } from '../../constants'
+import { AntDesign } from '@expo/vector-icons';
 
-const CoinDetails = ({ image, name, price, marketCap, marketCapRank }) => {
+const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
     return (
         <View>
-            <Image
-                source={image}
-                style={{ height: 80, width: 80 }}
-            />
-            <Text style={{ ...FONTS.largeTitle }}>{name}</Text>
-            <Text style={{ ...FONTS.largeTitle }}>Price: {price}</Text>
-            <Text style={{ ...FONTS.largeTitle }}>Market Cap: {marketCap}</Text>
-            <Text style={{ ...FONTS.largeTitle }}>Market Cap Rank: {marketCapRank}</Text>
-        </View>
+            <View
+                style={{
+                    marginTop: 30,
+                    marginBottom: SIZES.radius,
+                    paddingHorizontal: SIZES.padding,
+                    flexDirection: 'row',
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                }}
+            >
+                {/* Logo */}
+                <View
+                    style={{
+                        width: 35,
+                    }}
+                >
+                    <Image
+                        source={image}
+                        style={{ height: 33, width: 33 }}
+                    />
+                </View>
+
+                {/* Name */}
+
+                <View style={{ flex: 1, paddingHorizontal: SIZES.padding, }}>
+                    <Text style={{ fontSize: SIZES.h2 }}>{name}</Text>
+                    <Text style={{ fontSize: SIZES.h4 }}>{symbol}</Text>
+                </View>
+
+                <View>
+                    <AntDesign name="star" size={24} color="black" />
+                </View>
+
+            </View>
+
+            <View
+                style={{
+                    flexDirection: 'row',
+                    alignItems: "center",
+                    justifyContent: "center",
+                }}
+            >
+
+                <View style={{ flex: 1, paddingHorizontal: SIZES.padding, }}>
+                    <Text style={{ fontSize: SIZES.h1, fontWeight: "600", }}>$ {price}</Text>
+                </View>
+
+                <View style={{ paddingHorizontal: SIZES.padding, }}>
+                    <Text style={{ fontSize: 12, fontWeight: "600", }}>1 Day</Text>
+                    <Text style={{ fontSize: SIZES.h4, color: color }}>{priceChangePer}%</Text>
+                </View>
+            </View>
+        </View >
     )
 }
 
