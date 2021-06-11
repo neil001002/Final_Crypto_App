@@ -35,11 +35,7 @@ const Tab1 = () => {
             data={news.articles}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
-              return (
-              <>
-              <NewsCard item={item} />
-              </>
-              );
+              return <NewsCard item={item} />;
             }}
           />
         </View>
