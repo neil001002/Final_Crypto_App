@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { getCoinNews } from '../../stores/newsCryptoAPI/newsActions'
 import moment from "moment";
 import { useNavigation } from "@react-navigation/core";
+import { FONTS, SIZES } from '../../constants'
 
 const { width, height } = Dimensions.get("window");
 
@@ -20,6 +21,16 @@ const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
     );
     return (
         <View>
+            <View style={{
+                marginTop: 10,
+                marginBottom: SIZES.radius,
+                paddingHorizontal: SIZES.padding,
+                flexDirection: 'row',
+                alignItems: "center",
+                justifyContent: 'space-between'
+            }}>
+                <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>Trending news</Text>
+            </View>
             <FlatList
                 data={coinsnews.articles}
                 keyExtractor={(item, index) => "key" + index}
@@ -31,22 +42,36 @@ const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
                         >
                             <View style={styles.cardView}>
                                 <View
-                                    style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+                                    style={{
+                                        flexDirection: 'row',
+                                    }}
                                 >
 
-                                    <View style={{}}>
+                                    <View style={{ height: 108, width: "30%" }}>
                                         <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
                                     </View>
 
-                                    <View style={{}}>
+                                    <View style={{
+                                        paddingHorizontal: 5,
+                                        paddingVertical: 5,
+                                        width: "70%",
+                                        justifyContent: "space-between"
 
-                                        <Text style={styles.title}>{item.title}</Text>
-                                        <Text style={styles.author}>{item.source.name}</Text>
-                                        <Text style={styles.description}>{item.description}</Text>
+                                    }}>
 
-                                        <Text style={styles.author}> {moment(item.publishedAt || moment.now()).fromNow()} </Text>
+                                        <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
 
+                                        <Text style={styles.description} numberOfLines={3}>{item.description}</Text>
+                                        <View style={{
+                                            flexDirection: "row", justifyContent: "space-between",
+                                            // borderWidth: 1
+
+                                        }}>
+                                            <Text style={styles.sourceName}>{item.source.name}</Text>
+                                            <Text style={styles.time}> {moment(item.publishedAt || moment.now()).fromNow()} </Text>
+                                        </View>
                                     </View>
+
                                 </View>
 
                             </View>
@@ -75,34 +100,28 @@ const styles = StyleSheet.create({
         elevation: 12,
     },
     title: {
-        width: 223,
-        height: 46,
         color: "black",
-        fontSize: 20,
+        fontSize: 14,
         fontWeight: "bold",
     },
     description: {
-        marginVertical: width * 0.02,
-        marginHorizontal: width * 0.02,
         color: "gray",
-        fontSize: 18,
+        fontSize: 11,
     },
-    // readMore: {
-    //   color: "gray",
-    //   fontSize: 18,
-    //   marginVertical: width * 0.05,
-    //   fontWeight: "bold",
-    // },
     image: {
-        width: 150,
-        height: 150,
+        flex: 1,
         borderBottomLeftRadius: 5,
-        borderTopLeftRadius: 5
+        borderTopLeftRadius: 5,
+        resizeMode: "cover"
     },
-    author: {
-        marginBottom: width * 0.0,
-        marginHorizontal: width * 0.05,
-        fontSize: 15,
+    time: {
+        fontSize: 10,
+        color: "gray",
+    },
+    sourceName: {
+        // marginBottom: width * 0.0,
+        // marginHorizontal: width * 0.05,
+        fontSize: 10,
         color: "gray",
     },
 });

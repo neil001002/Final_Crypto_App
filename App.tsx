@@ -8,6 +8,7 @@ import rootReducer from "./stores/rootReducer";
 
 import Tabs from "./navigation/tabs";
 import { CoinDetailScreen, Webview } from "./screens";
+import { StatusBar } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 const App = () => {
   return (
     <Provider store={store}>
+      <StatusBar hidden />
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{

@@ -31,7 +31,7 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
 
                 {/* Name */}
 
-                <View style={{ flex: 1, paddingHorizontal: SIZES.padding, }}>
+                <View style={{ flex: 1, paddingHorizontal: 10, }}>
                     <Text style={{ fontSize: SIZES.h2 }}>{name}</Text>
                     <Text style={{ fontSize: SIZES.h4 }}>{symbol}</Text>
                 </View>
@@ -51,7 +51,7 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
             >
 
                 <View style={{ flex: 1, paddingHorizontal: SIZES.padding, }}>
-                    <Text style={{ fontSize: SIZES.h1, fontWeight: "600", }}>$ {price}</Text>
+                    <Text style={{ fontSize: SIZES.h1, fontWeight: "600", }}>$ {price.toFixed(2)}</Text>
                 </View>
 
                 <View style={{ paddingHorizontal: SIZES.padding, }}>

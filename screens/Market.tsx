@@ -52,7 +52,6 @@ const Market = ({ getCoinMarket, coins }) => {
           title={"Market"}
         />
       </View >
-      <StatusBar hidden />
       <ScrollView showsVerticalScrollIndicator={false} refreshControl={
         <RefreshControl
           refreshing={refreshing}

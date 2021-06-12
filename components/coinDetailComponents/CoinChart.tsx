@@ -23,6 +23,7 @@ const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
                 withVerticalLines={false}
                 withOuterLines={false}
                 data={{
+                    labels: ["7d", "6d", "5d", "4d", "3d", "2d", "1d", "Now"],
                     datasets: [
                         {
                             data: chartData
@@ -31,9 +32,7 @@ const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
                 }}
 
                 width={Dimensions.get("window").width}  // from react-native
-                // width={339}
-                height={182}
-                yAxisLabel={"$"}
+                height={200}
                 yAxisInterval={1} // optional, defaults to 1
                 chartConfig={{
                     backgroundGradientFrom: "#FFFFFF",
@@ -59,7 +58,8 @@ const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
                     elevation: 12,
                 }}
             />
-            <View style={{
+
+            {/* <View style={{
                 marginTop: 3,
                 marginBottom: SIZES.radius,
                 paddingHorizontal: SIZES.padding,
@@ -75,7 +75,8 @@ const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
                 <Text style={{ fontWeight: "600" }}>2D</Text>
                 <Text style={{ fontWeight: "600" }}>1D</Text>
                 <Text style={{ fontWeight: "600" }}>Now</Text>
-            </View>
+            </View> */}
+
         </View>
     )
 }
