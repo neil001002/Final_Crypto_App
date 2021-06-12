@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import moment from "moment";
@@ -15,8 +16,11 @@ import { COLORS, FONTS, SIZES } from "../constants";
 import { connect } from "react-redux";
 import { getCoinNews } from "../stores/newsCryptoAPI/newsActions";
 
+const { width, height } = Dimensions.get("window");
+
 const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
   const navigation = useNavigation();
+  const defaultImage = require("../assets/icons/briefcase.png");
 
   const [news, setNews] = useState([]);
 
@@ -58,17 +62,55 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
                   navigation.navigate("Webview", { url: item.url })
                 }
               >
-                <View style={styles.newsCard}>
-                  <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.title}</Text>
+                <View style={styles.cardView}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                    }}
+                  >
+                    <View style={{ height: 108, width: "30%" }}>
+                      <Image
+                        style={styles.image}
+                        source={{
+                          uri: item.urlToImage ? item.urlToImage : defaultImage,
+                        }}
+                      />
+                    </View>
+
+                    <View
+                      style={{
+                        paddingHorizontal: 5,
+                        paddingVertical: 5,
+                        width: "70%",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text style={styles.title} numberOfLines={2}>
+                        {item.title}
+                      </Text>
+
+                      <Text style={styles.description} numberOfLines={3}>
+                        {item.description}
+                      </Text>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          // borderWidth: 1
+                        }}
+                      >
+                        <Text style={styles.sourceName}>
+                          {item.source.name}
+                        </Text>
+                        <Text style={styles.time}>
+                          {" "}
+                          {moment(
+                            item.publishedAt || moment.now()
+                          ).fromNow()}{" "}
+                        </Text>
+                      </View>
+                    </View>
                   </View>
-                  <View style={styles.imageContainer}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.urlToImage }}
-                    />
-                  </View>
-                  <View></View>
                 </View>
               </TouchableOpacity>
             );
@@ -80,47 +122,47 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
 };
 
 const styles = StyleSheet.create({
-  newsCard: {
-    width: 150,
-    height: 80,
-    // borderWidth: 0.5,
-    borderColor: "red",
+  cardView: {
+    // position: "relative",
+    width: width / 1.2,
+    height: 108,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    backgroundColor: "#FFFFFF",
     borderRadius: 5,
-    // marginRight: 15,
-    // paddingHorizontal: 15,
-    // backgroundColor: "green",
-    marginLeft: SIZES.padding,
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 4,
+    shadowRadius: 15,
+    elevation: 6,
   },
-
-  titleContainer: {
-    backgroundColor: "yellow",
-    // borderWidth: 0.5,
-    borderColor: "black",
-    borderRadius: 5,
-    flex: 1,
-  },
-
   title: {
-    margin: 3,
-    borderWidth: 0.5,
-    borderRadius: 5,
+    color: "black",
+    fontSize: 14,
+    fontWeight: "bold",
   },
-
-  imageContainer: {
-    width: 150,
-    height: 50,
-    position: "absolute",
-    borderWidth: 1,
-    borderRadius: 5,
-    bottom: 0,
-    // backgroundColor: "pink",
-    paddingLeft: SIZES.padding,
-    right: 0,
+  description: {
+    color: "gray",
+    fontSize: 11,
   },
-
   image: {
     flex: 1,
+    borderBottomLeftRadius: 5,
+    borderTopLeftRadius: 5,
     resizeMode: "cover",
+  },
+  time: {
+    fontSize: 10,
+    color: "gray",
+  },
+  sourceName: {
+    // marginBottom: width * 0.0,
+    // marginHorizontal: width * 0.05,
+    fontSize: 10,
+    color: "gray",
   },
 });
 
