@@ -12,29 +12,18 @@ import { useNavigation } from "@react-navigation/core";
 import moment from "moment";
 
 import { COLORS, FONTS, SIZES } from "../constants";
-import newsAPI from "../news_api/News";
+import { connect } from "react-redux";
+import { getCoinNews } from "../stores/newsCryptoAPI/newsActions";
 
-const HomeNewsCard = () => {
+const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
   const navigation = useNavigation();
 
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    getNewsFromAPI();
+    const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
+    getCoinNews({ ID });
   }, []);
-
-  function getNewsFromAPI() {
-    newsAPI
-      .get(
-        "everything?q=crypto&sortBy=publishedAt&language=en&apiKey=f08f0a610915445b89739684b1217bc4"
-      )
-      .then(async function (response) {
-        setNews(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   if (!news) {
     return null;
@@ -59,8 +48,8 @@ const HomeNewsCard = () => {
       >
         <FlatList
           horizontal
-          data={news.articles}
-        //   maxToRenderPerBatch={5}
+          data={coinsnews.articles}
+          //   maxToRenderPerBatch={5}
           keyExtractor={(item, index) => "key" + index}
           renderItem={({ item }) => {
             return (
@@ -135,4 +124,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeNewsCard;
+function mapStateToProps(state) {
+  return {
+    coinsnews: state.newsReducer.coinsnews,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCoinNews: (ID) => {
+      return dispatch(getCoinNews(ID));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeNewsCard);
