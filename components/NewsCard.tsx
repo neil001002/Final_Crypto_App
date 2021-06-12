@@ -18,13 +18,16 @@ const NewsCard = ({ item }) => {
 
   const navigation = useNavigation();
 
-  const defaultImage = require("../assets/icons/briefcase.png")
+  const defaultImage = require("../assets/icons/briefcase.png");
 
   return (
     <View style={styles.cardView}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.author}>{item.source.name}</Text>
-      <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
+      <Image
+        style={styles.image}
+        source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }}
+      />
       <Text style={styles.author}> {time} </Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("Webview", { url: item.url })}
@@ -37,7 +40,7 @@ const NewsCard = ({ item }) => {
 
 const styles = StyleSheet.create({
   cardView: {
-    elevation: 2,
+    elevation: 12,
     backgroundColor: "white",
     margin: width * 0.03,
     borderRadius: width * 0.05,
