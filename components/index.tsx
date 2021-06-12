@@ -6,9 +6,22 @@ import NewsCard from "./NewsCard";
 import HomeNewsCard from "./HomeNewsCard";
 import CoinDetailNews from "./coinDetailComponents/CoinDetailNews";
 import HeaderTabIcons from "./HeaderTabIcons";
+<<<<<<< Updated upstream
 import CoinDetailSeconCard from "./coinDetailComponents/CoinDetailSeconCard";
 
 export {
     TabIcon, HeaderTab, CoinDetails, CoinChart, NewsCard,
     HomeNewsCard, CoinDetailNews, HeaderTabIcons, CoinDetailSeconCard
+=======
+
+export {
+  TabIcon,
+  HeaderTab,
+  CoinDetails,
+  CoinChart,
+  NewsCard,
+  HomeNewsCard,
+  CoinDetailNews,
+  HeaderTabIcons,
+>>>>>>> Stashed changes
 };

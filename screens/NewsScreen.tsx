@@ -21,9 +21,7 @@ const NewsScreen = () => {
       <Tab.Navigator
         tabBarOptions={{
           style: {
-            backgroundColor: COLORS.transparentWhite,
-            borderBottomStartRadius: 15,
-            borderBottomEndRadius: 15,
+            backgroundColor: COLORS.white,
             justifyContent: "space-between",
           },
         }}

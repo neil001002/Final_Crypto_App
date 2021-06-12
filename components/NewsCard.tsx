@@ -30,7 +30,9 @@ const NewsCard = ({ item }) => {
       />
       <Text style={styles.author}> {time} </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Webview", { url: item.url })}
+        onPress={() =>
+          navigation.navigate("Webview", { url: item.url, title: item.title })
+        }
       >
         <Text style={styles.description}>{item.description}</Text>
       </TouchableOpacity>

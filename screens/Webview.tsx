@@ -22,6 +22,10 @@ const Webview = ({ route }) => {
         <HeaderTabIcons title={"News"} />
         {!isLoaded ? (
           <Progress.Bar
+<<<<<<< Updated upstream
+=======
+            // style={{ position: "relative" }}
+>>>>>>> Stashed changes
             progress={progress}
             width={null}
             borderWidth={0}
@@ -30,6 +34,7 @@ const Webview = ({ route }) => {
           />
         ) : null}
       </View>
+<<<<<<< Updated upstream
       <WebView
         source={{ uri: route.params.url }}
         style={{ marginTop: 50 }}
@@ -38,6 +43,19 @@ const Webview = ({ route }) => {
         //progress bar
         onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
       />
+=======
+      {/* <View style={{  }}> */}
+
+      <WebView
+        style={{ marginTop: 50 }}
+        source={{ uri: route.params.url }}
+        //progress bar goaway
+        onLoadEnd={() => setLoaded(true)}
+        // progress bar
+        onLoadProgress={({ nativeEvent }) => setProgress(nativeEvent.progress)}
+      />
+      {/* </View> */}
+>>>>>>> Stashed changes
     </View>
   );
 };

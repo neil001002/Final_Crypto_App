@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { View, FlatList, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { NewsCard } from "../../components";
-import newsAPI from "../../news_api/News";
 import { getCoinNews } from "../../stores/newsCryptoAPI/newsActions";
 
 const Tab1 = ({ getCoinNews, coinsnews }) => {
@@ -11,7 +10,7 @@ const Tab1 = ({ getCoinNews, coinsnews }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft"
+      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
       getCoinNews({ ID });
     }, [])
   );
@@ -21,19 +20,19 @@ const Tab1 = ({ getCoinNews, coinsnews }) => {
   }
 
   return (
-    <>
+    <View>
       <ScrollView>
         <View>
           <FlatList
             data={coinsnews.articles}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
-              return <NewsCard item={item} />
+              return <NewsCard item={item} />;
             }}
           />
         </View>
       </ScrollView>
-    </>
+    </View>
   );
 };
 
@@ -45,14 +44,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getCoinNews: (
-      ID
-    ) => {
-      return dispatch(
-        getCoinNews(
-          ID
-        )
-      );
+    getCoinNews: (ID) => {
+      return dispatch(getCoinNews(ID));
     },
   };
 }
