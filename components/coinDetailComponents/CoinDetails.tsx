@@ -8,24 +8,27 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
         <View>
             <View
                 style={{
-                    marginTop: 30,
+                    marginTop: 24,
                     marginBottom: SIZES.radius,
                     paddingHorizontal: SIZES.padding,
                     flexDirection: 'row',
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "space-between",
+                    // borderWidth: 1,
 
                 }}
             >
                 {/* Logo */}
                 <View
                     style={{
-                        width: 35,
+                        width: 50,
+                        height: 50,
+                        // borderWidth: 1
                     }}
                 >
                     <Image
-                        source={image}
-                        style={{ height: 33, width: 33 }}
+                        source={{ uri: image }}
+                        style={{ flex: 1, resizeMode: "contain" }}
                     />
                 </View>
 
@@ -37,7 +40,7 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
                 </View>
 
                 <View>
-                    <AntDesign name="star" size={24} color="black" />
+                    <AntDesign name="star" size={35} color="black" />
                 </View>
 
             </View>

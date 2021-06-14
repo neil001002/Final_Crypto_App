@@ -5,6 +5,8 @@ import { Home, Market, Settings, NewsScreen } from "../screens";
 import { TabIcon } from "../components";
 import { COLORS, icons } from "../constants";
 
+import { Entypo } from '@expo/vector-icons';
+
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
@@ -51,15 +53,16 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name="More"
         component={Settings}
         options={{
           tabBarIcon: ({ focused }) => {
             return (
+              // <Entypo name="dots-three-vertical" size={24} color="black" />
               <TabIcon
                 focused={focused}
                 icon={icons.profile}
-                label="Settings"
+                label="More"
               />
             );
           },

@@ -11,7 +11,7 @@ import { FONTS, SIZES } from '../../constants'
 const { width, height } = Dimensions.get("window");
 
 const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
-    const defaultImage = require("../../assets/icons/briefcase.png")
+    // const defaultImage = require("../../assets/icons/briefcase.png")
     const navigation = useNavigation();
 
     useFocusEffect(
@@ -48,7 +48,7 @@ const CoinDetailNews = ({ ID, getCoinNews, coinsnews }) => {
                                 >
 
                                     <View style={{ height: 108, width: "30%" }}>
-                                        <Image style={styles.image} source={{ uri: item.urlToImage ? item.urlToImage : defaultImage }} />
+                                        <Image style={styles.image} source={{ uri: item.urlToImage }} />
                                     </View>
 
                                     <View style={{

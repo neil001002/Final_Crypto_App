@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, Share } from "react-native";
 import { HeaderTabIcons } from "../components";
 import { WebView } from "react-native-webview";
+import { AntDesign, Fontisto } from '@expo/vector-icons';
 import * as Progress from "react-native-progress";
 
 const Webview = ({ route }) => {
   const [progress, setProgress] = useState(0);
   const [isLoaded, setLoaded] = useState(false);
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -20,7 +22,7 @@ const Webview = ({ route }) => {
         }}
       >
         <HeaderTabIcons title={"News"} />
-        {!isLoaded ? (
+        {/* {!isLoaded ? (
           <Progress.Bar
             // style={{ position: "relative" }}
             progress={progress}
@@ -29,7 +31,7 @@ const Webview = ({ route }) => {
             borderRadius={0}
             color="orange"
           />
-        ) : null}
+        ) : null} */}
       </View>
 
       <WebView

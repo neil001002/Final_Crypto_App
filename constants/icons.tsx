@@ -10,6 +10,7 @@ const upArrow = require("../assets/icons/up-arrow.png");
 const verified = require("../assets/icons/verified.png");
 const withdraw = require("../assets/icons/withdraw.png");
 
+
 export default {
   briefcase,
   close,

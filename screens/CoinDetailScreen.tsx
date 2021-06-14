@@ -7,7 +7,6 @@ import HeaderTabIcons from '../components/HeaderTabIcons';
 
 const CoinDetailScreen = ({ route }) => {
     const ID = route.params.coin.id
-    console.log("totalVolume", route.params.coin.totalVolume)
 
     return (
         <>
@@ -35,7 +34,7 @@ const CoinDetailScreen = ({ route }) => {
 
                     {/* Coin details */}
                     <CoinDetails
-                        image={{ uri: route.params.coin.image }}
+                        image={route.params.coin.image}
                         name={route.params.coin.name}
                         price={route.params.coin.price}
                         priceChangePer={(route.params.coin.priceChangePer).toFixed(2)}

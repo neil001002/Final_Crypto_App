@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,6 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  RefreshControl,
-  StatusBar
 } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
@@ -16,24 +14,13 @@ import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab } from "../components";
 import GlobalData from "../components/GlobalData";
 
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
-
 const Market = ({ getCoinMarket, coins }) => {
   const navigation = useNavigation();
-  useFocusEffect(
-    React.useCallback(() => {
-      getCoinMarket();
-    }, [])
-  );
+  useEffect(() => {
+    getCoinMarket();
+  }, [])
 
   const [refreshing, setRefreshing] = React.useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
 
   return (
     <>
@@ -52,12 +39,7 @@ const Market = ({ getCoinMarket, coins }) => {
           title={"Market"}
         />
       </View >
-      <ScrollView showsVerticalScrollIndicator={false} refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{
           position: 'relative',
           backgroundColor: "#EBEBEB",

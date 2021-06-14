@@ -20,7 +20,7 @@ const { width, height } = Dimensions.get("window");
 
 const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
   const navigation = useNavigation();
-  const defaultImage = require("../assets/icons/briefcase.png");
+  // const defaultImage = require("../assets/icons/briefcase.png");
 
   const [news, setNews] = useState([]);
 
@@ -34,24 +34,22 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
   }
 
   return (
-    <View style={{ marginTop: 30 }}>
-      <Text
-        style={{
-          color: COLORS.black,
-          ...FONTS.h3,
-          fontSize: 18,
-          paddingHorizontal: SIZES.padding,
-        }}
-      >
-        Top news
-      </Text>
-      <ScrollView
-        // horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{ paddingTop: 20 }}
-      >
+    <View style={{}}>
+      <View style={{
+        marginTop: 10,
+        // borderWidth: 1,
+        // marginBottom: SIZES.radius,
+        paddingHorizontal: SIZES.padding,
+        flexDirection: 'row',
+        alignItems: "center",
+        justifyContent: 'space-between'
+      }}>
+        <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>Top news</Text>
+      </View>
+      <ScrollView>
         <FlatList
           horizontal
+          showsHorizontalScrollIndicator={false}
           data={coinsnews.articles}
           //   maxToRenderPerBatch={5}
           keyExtractor={(item, index) => "key" + index}
@@ -72,7 +70,7 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
                       <Image
                         style={styles.image}
                         source={{
-                          uri: item.urlToImage ? item.urlToImage : defaultImage,
+                          uri: item.urlToImage
                         }}
                       />
                     </View>
@@ -126,8 +124,8 @@ const styles = StyleSheet.create({
     // position: "relative",
     width: width / 1.2,
     height: 108,
-    marginVertical: 5,
-    marginHorizontal: 5,
+    marginVertical: 10,
+    marginLeft: 10,
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
     shadowColor: "rgba(0, 0, 0, 0.25)",

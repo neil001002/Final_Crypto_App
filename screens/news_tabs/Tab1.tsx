@@ -8,12 +8,10 @@ import { getCoinNews } from "../../stores/newsCryptoAPI/newsActions";
 const Tab1 = ({ getCoinNews, coinsnews }) => {
   const [news, setNews] = useState([]);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
-      getCoinNews({ ID });
-    }, [])
-  );
+  useEffect(() => {
+    const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
+    getCoinNews({ ID });
+  }, [])
 
   if (!news) {
     return null;

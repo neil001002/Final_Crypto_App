@@ -1,11 +1,35 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Share } from 'react-native'
 import { COLORS, SIZES, FONTS } from '../constants';
 import { AntDesign, Fontisto } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+
+
 const HeaderTabIcons = ({ title }) => {
     const navigation = useNavigation();
+    // const URL = "HI";
+
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                message:
+                    "This is shared via Cryptonium. \n\nYour all in one crypto app.",
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
 
     return (
         <View
@@ -51,7 +75,7 @@ const HeaderTabIcons = ({ title }) => {
             </View>
 
             {/* Share button */}
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onShare}>
                 <View>
                     <Fontisto name="share" size={24} color="black" />
                 </View>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -14,15 +14,14 @@ import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import { HeaderTab, HomeNewsCard } from "../components";
 import GlobalData from "../components/GlobalData";
+import HomeBlogCard from "../components/blogComponents/HomeBlogCard";
 
 const Home = ({ getCoinMarket, coins }) => {
   const navigation = useNavigation();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getCoinMarket();
-    }, [])
-  );
+  useEffect(() => {
+    getCoinMarket();
+  }, [])
 
   return (
     <>
@@ -63,123 +62,159 @@ const Home = ({ getCoinMarket, coins }) => {
             <HomeNewsCard />
           </View>
 
+          <View style={{
+            marginTop: 10,
+            // borderWidth: 1,
+            // marginBottom: SIZES.radius,
+            paddingHorizontal: SIZES.padding,
+            flexDirection: 'row',
+            alignItems: "center",
+            justifyContent: 'space-between'
+          }}>
+            <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>Top Crypto Currency</Text>
+          </View>
           {/* Top Cryptocurrency */}
-          <FlatList
-            data={coins.slice(0, 5)}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={{
-              marginTop: 30,
-              paddingHorizontal: SIZES.padding,
+          <View
+            style={{
+              position: "relative",
+              // marginVertical: 10,
+              margin: 10,
+              // borderWidth: 1,
+              backgroundColor: "#FFFFFF",
+              borderRadius: 5,
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowOffset: {
+                width: 4,
+                height: 4,
+              },
+              shadowOpacity: 4,
+              shadowRadius: 15,
+
+              elevation: 6,
             }}
-            ListHeaderComponent={
-              <View style={{ marginBottom: SIZES.radius }}>
-                <Text style={{ color: COLORS.black, ...FONTS.h3, fontSize: 18 }}>
-                  Top crypto currency
-                </Text>
-              </View>
-            }
-            renderItem={({ item }) => {
-              let priceColor =
-                item.price_change_percentage_24h == 0
-                  ? COLORS.lightGray3
-                  : item.price_change_percentage_24h > 0
-                    ? COLORS.green
-                    : COLORS.red;
+          >
 
-              return (
-                <TouchableOpacity
-                  style={{
-                    height: 55,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onPress={() => navigation.navigate("CoinDetailScreen", {
-                    coin: {
-                      id: item.id,
-                      image: item.image,
-                      name: item.name,
-                      price: item.current_price,
-                      priceChangePer: item.price_change_percentage_24h,
-                      priceChange24h: item.price_change_24h,
-                      symbol: item.symbol,
-                      marketCap: item.market_cap,
-                      marketCapRank: item.market_cap_rank,
-                      sevenDayChart: item.sparkline_in_7d.price,
-                      color: priceColor,
-                      totalVolume: item.total_volume,
-                      dayHigh: item.high_24h,
-                      dayLow: item.low_24h,
-                      marketCapChangeDay: item.market_cap_change_24h,
-                      marketCapChangeDayPer: item.market_cap_change_percentage_24h,
-                      totalSupply: item.total_supply
-                    }
-                  })}
-                >
+            <FlatList
+              data={coins.slice(0, 5)}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={{
+                // marginTop: SIZES.padding,
+                margin: 10,
+              }}
 
-                  {/* Logo */}
-                  <View
+              renderItem={({ item }) => {
+                let priceColor =
+                  item.price_change_percentage_24h == 0
+                    ? COLORS.lightGray3
+                    : item.price_change_percentage_24h > 0
+                      ? COLORS.green
+                      : COLORS.red;
+
+                return (
+                  <TouchableOpacity
                     style={{
-                      width: 35,
+                      height: 35,
+                      marginVertical: 10,
+                      // borderWidth: 1,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
+                    onPress={() => navigation.navigate("CoinDetailScreen", {
+                      coin: {
+                        id: item.id,
+                        image: item.image,
+                        name: item.name,
+                        price: item.current_price,
+                        priceChangePer: item.price_change_percentage_24h,
+                        priceChange24h: item.price_change_24h,
+                        symbol: item.symbol,
+                        marketCap: item.market_cap,
+                        marketCapRank: item.market_cap_rank,
+                        sevenDayChart: item.sparkline_in_7d.price,
+                        color: priceColor,
+                        totalVolume: item.total_volume,
+                        dayHigh: item.high_24h,
+                        dayLow: item.low_24h,
+                        marketCapChangeDay: item.market_cap_change_24h,
+                        marketCapChangeDayPer: item.market_cap_change_percentage_24h,
+                        totalSupply: item.total_supply
+                      }
+                    })}
                   >
-                    <Image
-                      source={{ uri: item.image }}
-                      style={{ height: 20, width: 20 }}
-                    />
-                  </View>
 
-                  {/* Name */}
-
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
-                  </View>
-
-                  {/* Figures */}
-
-                  <View>
-                    <Text style={{ textAlign: "right", ...FONTS.h4 }}>
-                      $ {item.current_price}
-                    </Text>
-
+                    {/* Logo */}
                     <View
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
+                        width: 35,
+                        height: 35,
+                        // borderWidth: 1
                       }}
                     >
-                      {item.price_change_percentage_24h != 0 && (
-                        <Image
-                          source={icons.upArrow}
-                          style={{
-                            height: 10,
-                            width: 10,
-                            tintColor: priceColor,
-                            transform:
-                              item.price_change_percentage_24h > 0
-                                ? [{ rotate: "0deg" }]
-                                : [{ rotate: "180deg" }],
-                          }}
-                        />
-                      )}
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{ flex: 1, resizeMode: "contain" }}
+                      />
+                    </View>
 
-                      <Text
+                    {/* Name */}
+
+                    <View style={{ flex: 1, marginLeft: 5 }}>
+                      <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
+                      <Text style={{ ...FONTS.body5 }}>{item.symbol.toUpperCase()}</Text>
+                    </View>
+
+                    {/* Figures */}
+
+                    <View>
+                      <Text style={{ textAlign: "right", ...FONTS.h4 }}>
+                        $ {item.current_price}
+                      </Text>
+
+                      <View
                         style={{
-                          marginLeft: 5,
-                          color: priceColor,
-                          ...FONTS.body5,
-                          lineHeight: 15,
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-end",
                         }}
                       >
-                        {item.price_change_percentage_24h.toFixed(2)}%
-                      </Text>
+                        {item.price_change_percentage_24h != 0 && (
+                          <Image
+                            source={icons.upArrow}
+                            style={{
+                              height: 10,
+                              width: 10,
+                              tintColor: priceColor,
+                              transform:
+                                item.price_change_percentage_24h > 0
+                                  ? [{ rotate: "0deg" }]
+                                  : [{ rotate: "180deg" }],
+                            }}
+                          />
+                        )}
+
+                        <Text
+                          style={{
+                            marginLeft: 5,
+                            color: priceColor,
+                            ...FONTS.body5,
+                            lineHeight: 15,
+                          }}
+                        >
+                          {item.price_change_percentage_24h.toFixed(2)}%
+                        </Text>
+                      </View>
                     </View>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+
+          <View>
+            <HomeBlogCard />
+          </View>
+
         </View>
       </ScrollView>
     </>
