@@ -35,15 +35,17 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
 
   return (
     <View style={{}}>
-      <View style={{
-        marginTop: 10,
-        // borderWidth: 1,
-        // marginBottom: SIZES.radius,
-        paddingHorizontal: SIZES.padding,
-        flexDirection: 'row',
-        alignItems: "center",
-        justifyContent: 'space-between'
-      }}>
+      <View
+        style={{
+          marginTop: 10,
+          // borderWidth: 1,
+          // marginBottom: SIZES.radius,
+          paddingHorizontal: SIZES.padding,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>Top news</Text>
       </View>
       <ScrollView>
@@ -70,7 +72,7 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
                       <Image
                         style={styles.image}
                         source={{
-                          uri: item.urlToImage
+                          uri: item.urlToImage,
                         }}
                       />
                     </View>
@@ -101,10 +103,7 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
                           {item.source.name}
                         </Text>
                         <Text style={styles.time}>
-                          {" "}
-                          {moment(
-                            item.publishedAt || moment.now()
-                          ).fromNow()}{" "}
+                          {moment(item.publishedAt || moment.now()).fromNow()}
                         </Text>
                       </View>
                     </View>

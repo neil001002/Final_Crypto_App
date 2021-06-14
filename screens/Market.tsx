@@ -18,34 +18,32 @@ const Market = ({ getCoinMarket, coins }) => {
   const navigation = useNavigation();
   useEffect(() => {
     getCoinMarket();
-  }, [])
+  }, []);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
   return (
     <>
       {/* Header section */}
-      < View
+      <View
         style={{
-          position: 'absolute',
+          position: "absolute",
           left: 0,
           right: 0,
-          width: '100%',
+          width: "100%",
           zIndex: 1,
         }}
-
       >
-        <HeaderTab
-          title={"Market"}
-        />
-      </View >
+        <HeaderTab title={"Market"} />
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{
-          position: 'relative',
-          backgroundColor: "#EBEBEB",
-          marginTop: 50,
-        }}>
-
+        <View
+          style={{
+            position: "relative",
+            backgroundColor: "#EBEBEB",
+            marginTop: 50,
+          }}
+        >
           {/* Global data */}
           <View
             style={{
@@ -61,8 +59,9 @@ const Market = ({ getCoinMarket, coins }) => {
           <View
             style={{
               position: "relative",
-              marginVertical: 10,
-              marginHorizontal: 10,
+              margin: 10,
+              // marginVertical: 10,
+              // marginHorizontal: 10,
               backgroundColor: "#FFFFFF",
               borderRadius: 5,
               shadowColor: "rgba(0, 0, 0, 0.25)",
@@ -73,72 +72,80 @@ const Market = ({ getCoinMarket, coins }) => {
               shadowOpacity: 4,
               shadowRadius: 15,
 
-              elevation: 12,
+              elevation: 6,
             }}
           >
             <FlatList
               data={coins}
               keyExtractor={(item) => item.id}
               contentContainerStyle={{
-                paddingVertical: SIZES.padding,
-                paddingHorizontal: SIZES.padding,
+                // paddingVertical: SIZES.padding,
+                // paddingHorizontal: SIZES.padding,
+                margin: 10,
               }}
-
               renderItem={({ item }) => {
                 let priceColor =
                   item.price_change_percentage_24h == 0
                     ? COLORS.lightGray3
                     : item.price_change_percentage_24h > 0
-                      ? COLORS.green
-                      : COLORS.red;
+                    ? COLORS.green
+                    : COLORS.red;
 
                 return (
                   <TouchableOpacity
                     style={{
-                      height: 55,
+                      // height: 55,
+                      height: 35,
+                      marginVertical: 10,
                       flexDirection: "row",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    onPress={() => navigation.navigate("CoinDetailScreen", {
-                      coin: {
-                        id: item.id,
-                        image: item.image,
-                        name: item.name,
-                        price: item.current_price,
-                        priceChangePer: item.price_change_percentage_24h,
-                        priceChange24h: item.price_change_24h,
-                        symbol: item.symbol,
-                        marketCap: item.market_cap,
-                        marketCapRank: item.market_cap_rank,
-                        sevenDayChart: item.sparkline_in_7d.price,
-                        color: priceColor,
-                        totalVolume: item.total_volume,
-                        dayHigh: item.high_24h,
-                        dayLow: item.low_24h,
-                        marketCapChangeDay: item.market_cap_change_24h,
-                        marketCapChangeDayPer: item.market_cap_change_percentage_24h,
-                        totalSupply: item.total_supply
-                      }
-                    })}
+                    onPress={() =>
+                      navigation.navigate("CoinDetailScreen", {
+                        coin: {
+                          id: item.id,
+                          image: item.image,
+                          name: item.name,
+                          price: item.current_price,
+                          priceChangePer: item.price_change_percentage_24h,
+                          priceChange24h: item.price_change_24h,
+                          symbol: item.symbol,
+                          marketCap: item.market_cap,
+                          marketCapRank: item.market_cap_rank,
+                          sevenDayChart: item.sparkline_in_7d.price,
+                          color: priceColor,
+                          totalVolume: item.total_volume,
+                          dayHigh: item.high_24h,
+                          dayLow: item.low_24h,
+                          marketCapChangeDay: item.market_cap_change_24h,
+                          marketCapChangeDayPer:
+                            item.market_cap_change_percentage_24h,
+                          totalSupply: item.total_supply,
+                        },
+                      })
+                    }
                   >
                     {/* Logo */}
                     <View
                       style={{
                         width: 35,
+                        height: 35,
                       }}
                     >
                       <Image
                         source={{ uri: item.image }}
-                        style={{ height: 25, width: 25 }}
+                        style={{ flex: 1, resizeMode: "contain" }}
                       />
                     </View>
 
                     {/* Name */}
 
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, marginLeft: 5 }}>
                       <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
-                      <Text style={{ ...FONTS.body5 }}>{item.symbol.toUpperCase()}</Text>
+                      <Text style={{ ...FONTS.body5 }}>
+                        {item.symbol.toUpperCase()}
+                      </Text>
                     </View>
 
                     {/* Figures */}

@@ -7,6 +7,7 @@ import HomeNewsCard from "./HomeNewsCard";
 import CoinDetailNews from "./coinDetailComponents/CoinDetailNews";
 import HeaderTabIcons from "./HeaderTabIcons";
 import CoinDetailSeconCard from "./coinDetailComponents/CoinDetailSeconCard";
+import HomeHeader from "./HomeHeader";
 
 export {
   TabIcon,
@@ -18,4 +19,5 @@ export {
   CoinDetailNews,
   HeaderTabIcons,
   CoinDetailSeconCard,
+  HomeHeader,
 };
