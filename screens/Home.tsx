@@ -49,7 +49,7 @@ const Home = ({ getCoinMarket, coins }) => {
         }}
       >
         {/* Global crypto data */}
-        <View
+        {/* <View
           style={{
             position: "relative",
             backgroundColor: "#343333",
@@ -57,7 +57,7 @@ const Home = ({ getCoinMarket, coins }) => {
           }}
         >
           <GlobalData />
-        </View>
+        </View> */}
 
         {/* Top News HorizontalList */}
         <View>
@@ -111,8 +111,8 @@ const Home = ({ getCoinMarket, coins }) => {
                 item.price_change_percentage_24h == 0
                   ? COLORS.lightGray3
                   : item.price_change_percentage_24h > 0
-                  ? COLORS.green
-                  : COLORS.red;
+                    ? COLORS.green
+                    : COLORS.red;
 
               return (
                 <TouchableOpacity

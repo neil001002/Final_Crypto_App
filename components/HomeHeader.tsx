@@ -47,6 +47,7 @@ const HomeHeader = () => {
           justifyContent: "center",
           marginHorizontal: SIZES.padding,
           marginBottom: SIZES.padding,
+          borderBottomWidth: 0.3
         }}
       >
         <Text style={{ ...FONTS.body2, fontWeight: "bold", opacity: 0.9 }}>
