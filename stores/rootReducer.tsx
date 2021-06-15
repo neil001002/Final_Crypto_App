@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import blogReducer from "./blogAPI/blogReducer";
 import chartReducer from "./chartAPI/chartReducer";
+import globalReducer from "./globalDataAPI/globalReducer";
 import marketReducer from "./marketAPI/marketReducer";
 import newsReducer from "./newsCryptoAPI/newsReducer";
 
@@ -9,4 +10,5 @@ export default combineReducers({
   chartReducer,
   newsReducer,
   blogReducer,
+  globalReducer,
 });

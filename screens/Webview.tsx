@@ -22,7 +22,7 @@ const Webview = ({ route }) => {
         }}
       >
         <HeaderTabIcons title={"News"} />
-        {/* {!isLoaded ? (
+        {!isLoaded ? (
           <Progress.Bar
             // style={{ position: "relative" }}
             progress={progress}
@@ -31,7 +31,7 @@ const Webview = ({ route }) => {
             borderRadius={0}
             color="orange"
           />
-        ) : null} */}
+        ) : null}
       </View>
 
       <WebView

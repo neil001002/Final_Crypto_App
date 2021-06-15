@@ -10,8 +10,8 @@ const TabIcon = ({ focused, icon, iconStyle, label }) => {
         source={icon}
         resizeMode="contain"
         style={{
-          width: 25,
-          height: 25,
+          width: 20,
+          height: 20,
           tintColor: focused ? COLORS.white : COLORS.black,
           ...iconStyle,
         }}

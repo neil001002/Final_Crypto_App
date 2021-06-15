@@ -43,8 +43,6 @@ export function getCoinMarket(
       },
     })
       .then((response) => {
-        console.log("getCoinMarket");
-        console.log(response);
         if (response.status == 200) {
           dispatch(getCoinMarketSuccess(response.data));
         } else {

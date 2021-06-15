@@ -15,7 +15,7 @@ const Tabs = () => {
       tabBarOptions={{
         showLabel: false,
         style: {
-          height: 70,
+          height: 55,
           backgroundColor: COLORS.primary,
           borderTopColor: "transparent",
         },

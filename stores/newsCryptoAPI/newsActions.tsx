@@ -28,7 +28,7 @@ export function getCoinNews({ ID }) {
   return (dispatch) => {
     dispatch(getCoinNewsBegin());
 
-    let apiUrl = `https://newsapi.org/v2/everything?q=${ID}&sortBy=publishedAt&language=en&apiKey=8e4d3bae661342c79dcbb9ad683a7095`;
+    let apiUrl = `https://newsapi.org/v2/everything?q=${ID}&sortBy=publishedAt&language=en&apiKey=f08f0a610915445b89739684b1217bc4`;
 
     return axios({
       url: apiUrl,
@@ -38,8 +38,6 @@ export function getCoinNews({ ID }) {
       },
     })
       .then((response) => {
-        console.log("getCoinNews");
-        console.log(response);
         if (response.status == 200) {
           dispatch(getCoinNewsSuccess(response.data));
         } else {

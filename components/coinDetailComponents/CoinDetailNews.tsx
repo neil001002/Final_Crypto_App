@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 4,
         shadowRadius: 15,
-        elevation: 12,
+        elevation: 6,
     },
     title: {
         color: "black",

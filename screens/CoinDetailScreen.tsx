@@ -27,7 +27,7 @@ const CoinDetailScreen = ({ route }) => {
                 <View
                     style={{
                         position: 'relative',
-                        backgroundColor: "#EBEBEB",
+                        backgroundColor: "white",
                         marginTop: 50,
                     }}
                 >

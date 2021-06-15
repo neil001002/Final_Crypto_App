@@ -1,7 +1,20 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React from 'react'
 import { View, Text } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import { getGlobalMarket } from '../stores/globalDataAPI/globalActions';
 
-const GlobalData = () => {
+const GlobalData = ({ getGlobalMarket, globaldata }) => {
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getGlobalMarket();
+        }, [])
+    );
+    console.log("GlobalData", globaldata);
+
+
     return (
         <View
             style={{
@@ -14,33 +27,41 @@ const GlobalData = () => {
             <Text
                 style={{
                     position: "relative",
-                    // fontFamily: "Poppins",
-                    // fontStyle: "normal",
-                    // fontWeight: "bold",
-                    // fontSize: 13,
-                    // lineHeight: 19,
-                    /* identical to box height */
                     color: "#FFFFFF",
                 }}
             >
-                Global Market Cap
+                Active coins
             </Text>
             <Text
                 style={{
                     position: "relative",
-                    // fontFamily: "Poppins",
-                    // fontStyle: "normal",
-                    // fontWeight: 600,
-                    // fontSize: 13,
-                    // lineHeight: 19,
-                    /* identical to box height */
                     color: "#06E101",
                 }}
             >
-                53637388822
+                {/* {globaldata.data.data.active_cryptocurrencies} */}
             </Text>
         </View>
     )
 }
 
-export default GlobalData
+function mapStateToProps(state) {
+    return {
+        globaldata: state.globalReducer.globaldata,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getGlobalMarket: (
+
+        ) => {
+            return dispatch(
+                getGlobalMarket(
+
+                )
+            );
+        },
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalData);

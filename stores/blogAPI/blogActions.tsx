@@ -36,8 +36,6 @@ export function getBlog() {
       },
     })
       .then((response) => {
-        console.log("getBlog");
-        console.log(response);
         if (response.status == 200) {
           dispatch(getBlogSuccess(response.data));
         } else {

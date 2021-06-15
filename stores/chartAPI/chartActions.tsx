@@ -41,8 +41,6 @@ export function getCoinChart(
             },
         })
             .then((response) => {
-                console.log("getCoinChart");
-                console.log(response.data);
                 if (response.status == 200) {
                     dispatch(getCoinChartSuccess(response.data));
                 } else {

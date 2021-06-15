@@ -7,7 +7,7 @@ const HomeHeader = () => {
     <View style={{ backgroundColor: COLORS.white }}>
       <View
         style={{
-          margin: SIZES.padding,
+          marginTop: SIZES.padding,
           alignItems: "center",
           justifyContent: "center",
         }}
@@ -15,11 +15,28 @@ const HomeHeader = () => {
         <Image
           source={require("../assets/cryptoniumLogo.png")}
           style={{
-            height: 50,
-            width: 200,
+            height: 35,
+            width: "100%",
             resizeMode: "contain",
             opacity: 0.8,
-            marginTop: SIZES.padding,
+            // marginTop: SIZES.padding,
+            // borderWidth: 1,
+          }}
+        />
+      </View>
+      <View style={{
+        // margin: SIZES.padding,
+        alignItems: "center",
+        justifyContent: "center",
+        // borderWidth: 1
+      }}>
+        <Image source={require("../assets/undrawHomePage.png")}
+          style={{
+            height: 150,
+            width: '100%',
+            resizeMode: "contain",
+            opacity: 0.8,
+            // marginTop: SIZES.padding,
             // borderWidth: 1,
           }}
         />
@@ -28,10 +45,11 @@ const HomeHeader = () => {
         style={{
           alignItems: "center",
           justifyContent: "center",
-          margin: SIZES.padding,
+          marginHorizontal: SIZES.padding,
+          marginBottom: SIZES.padding,
         }}
       >
-        <Text style={{ ...FONTS.body2, fontWeight: "bold" }}>
+        <Text style={{ ...FONTS.body2, fontWeight: "bold", opacity: 0.9 }}>
           Welcome to Cryptonium
         </Text>
         <Text style={{ ...FONTS.body3, color: "gray", margin: 10 }}>

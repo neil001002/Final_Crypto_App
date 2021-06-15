@@ -55,7 +55,7 @@ const CoinChart = ({ ID, chartData, colorData, getCoinChart, coinschart }) => {
                     shadowOpacity: 4,
                     shadowRadius: 15,
 
-                    elevation: 12,
+                    elevation: 6,
                 }}
             />
 

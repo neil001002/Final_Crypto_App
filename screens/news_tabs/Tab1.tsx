@@ -18,7 +18,7 @@ const Tab1 = ({ getCoinNews, coinsnews }) => {
   }
 
   return (
-    <View>
+    <>
       <ScrollView>
         <View>
           <FlatList
@@ -30,7 +30,7 @@ const Tab1 = ({ getCoinNews, coinsnews }) => {
           />
         </View>
       </ScrollView>
-    </View>
+    </>
   );
 };
 

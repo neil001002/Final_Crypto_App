@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./stores/rootReducer";
 
 import Tabs from "./navigation/tabs";
-import { CoinDetailScreen, Webview } from "./screens";
+import { AboutUs, BlogScreen, CoinDetailScreen, Disclaimer, PrivacyPolicy, Webview } from "./screens";
 import { StatusBar } from "react-native";
 
 const Stack = createStackNavigator();
@@ -27,7 +27,11 @@ const App = () => {
         >
           <Stack.Screen name="MainLayout" component={Tabs} />
           <Stack.Screen name="CoinDetailScreen" component={CoinDetailScreen} />
+          <Stack.Screen name="BlogScreen" component={BlogScreen} />
           <Stack.Screen name="Webview" component={Webview} />
+          <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{ headerShown: true }} />
+          <Stack.Screen name="Disclaimer" component={Disclaimer} options={{ headerShown: true }} />
+          <Stack.Screen name="AboutUs" component={AboutUs} options={{ headerShown: true }} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

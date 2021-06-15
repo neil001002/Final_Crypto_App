@@ -40,7 +40,7 @@ const Market = ({ getCoinMarket, coins }) => {
         <View
           style={{
             position: "relative",
-            backgroundColor: "#EBEBEB",
+            backgroundColor: "white",
             marginTop: 50,
           }}
         >
