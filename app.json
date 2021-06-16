@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Final_Crypto_App",
-    "slug": "Final_Crypto_App",
+    "name": "cryptonium",
+    "slug": "cryptonium",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.maglux.cryptonium"
     },
     "web": {
       "favicon": "./assets/icon.png"
