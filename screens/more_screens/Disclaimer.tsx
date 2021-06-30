@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { COLORS, FONTS, SIZES } from '../../constants'
+import { COLORS, SIZES } from '../../constants'
 
 const Disclaimer = () => {
     return (

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, View } from 'react-native'
+import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import { } from 'react-native-safe-area-context';
-import { CoinChart, CoinDetailNews, CoinDetails, CoinDetailSeconCard, } from '../components';
+import { Ads, CoinChart, CoinDetailNews, CoinDetails, CoinDetailSeconCard, } from '../components';
 import HeaderTabIcons from '../components/HeaderTabIcons';
 
 const CoinDetailScreen = ({ route }) => {
@@ -68,6 +68,9 @@ const CoinDetailScreen = ({ route }) => {
                     />
                 </View>
             </ScrollView>
+
+            {/* Display a banner */}
+            <Ads />
         </>
     )
 }

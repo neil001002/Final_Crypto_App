@@ -12,34 +12,32 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import moment from "moment";
 
-import { COLORS, FONTS, SIZES } from "../constants";
+import { SIZES } from "../constants";
 import { connect } from "react-redux";
 import { getCoinNews } from "../stores/newsCryptoAPI/newsActions";
+import SkeletonContent from 'react-native-skeleton-content';
+import { useFocusEffect } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
 const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
+  const [isLoading, setLoading] = useState(true);
   const navigation = useNavigation();
-  // const defaultImage = require("../assets/icons/briefcase.png");
 
-  const [news, setNews] = useState([]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
+      getCoinNews({ ID })
+        .finally(() => setLoading(false));
+    }, [])
+  );
 
-  useEffect(() => {
-    const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
-    getCoinNews({ ID });
-  }, []);
-
-  if (!news) {
-    return null;
-  }
 
   return (
     <View style={{}}>
       <View
         style={{
           marginTop: 10,
-          // borderWidth: 1,
-          // marginBottom: SIZES.radius,
           paddingHorizontal: SIZES.padding,
           flexDirection: "row",
           alignItems: "center",
@@ -49,70 +47,91 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
         <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>Top news</Text>
       </View>
       <ScrollView>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={coinsnews.articles}
-          //   maxToRenderPerBatch={5}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Webview", { url: item.url })
-                }
-              >
-                <View style={styles.cardView}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                    }}
-                  >
-                    <View style={{ height: 108, width: "30%" }}>
-                      <Image
-                        style={styles.image}
-                        source={{
-                          uri: item.urlToImage,
-                        }}
-                      />
-                    </View>
-
+        {isLoading ? <SkeletonContent
+          containerStyle={{ flex: 1, width: 300 }}
+          isLoading={isLoading}
+          layout={[
+            {
+              key: 'someId', width: width / 1.2,
+              height: 108,
+              marginVertical: 10,
+              marginLeft: 10,
+              backgroundColor: "#FFFFFF",
+              borderRadius: 5,
+              shadowColor: "rgba(0, 0, 0, 0.25)",
+              shadowOffset: {
+                width: 4,
+                height: 4,
+              },
+              shadowOpacity: 4,
+              shadowRadius: 15,
+              elevation: 6,
+            },
+          ]}
+        /> : (
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={coinsnews.articles}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("Webview", { url: item.url })
+                  }
+                >
+                  <View style={styles.cardView}>
                     <View
                       style={{
-                        paddingHorizontal: 5,
-                        paddingVertical: 5,
-                        width: "70%",
-                        justifyContent: "space-between",
+                        flexDirection: "row",
                       }}
                     >
-                      <Text style={styles.title} numberOfLines={2}>
-                        {item.title}
-                      </Text>
+                      <View style={{ height: 108, width: "30%" }}>
+                        <Image
+                          style={styles.image}
+                          source={{
+                            uri: item.urlToImage,
+                          }}
+                        />
+                      </View>
 
-                      <Text style={styles.description} numberOfLines={3}>
-                        {item.description}
-                      </Text>
                       <View
                         style={{
-                          flexDirection: "row",
+                          paddingHorizontal: 5,
+                          paddingVertical: 5,
+                          width: "70%",
                           justifyContent: "space-between",
-                          // borderWidth: 1
                         }}
                       >
-                        <Text style={styles.sourceName}>
-                          {item.source.name}
+                        <Text style={styles.title} numberOfLines={2}>
+                          {item.title}
                         </Text>
-                        <Text style={styles.time}>
-                          {moment(item.publishedAt || moment.now()).fromNow()}
+
+                        <Text style={styles.description} numberOfLines={3}>
+                          {item.description}
                         </Text>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <Text style={styles.sourceName}>
+                            {item.source.name}
+                          </Text>
+                          <Text style={styles.time}>
+                            {moment(item.publishedAt || moment.now()).fromNow()}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                   </View>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-        />
+                </TouchableOpacity>
+              );
+            }}
+          />
+        )}
       </ScrollView>
     </View>
   );
@@ -120,7 +139,6 @@ const HomeNewsCard = ({ getCoinNews, coinsnews }) => {
 
 const styles = StyleSheet.create({
   cardView: {
-    // position: "relative",
     width: width / 1.2,
     height: 108,
     marginVertical: 10,
@@ -156,8 +174,6 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   sourceName: {
-    // marginBottom: width * 0.0,
-    // marginHorizontal: width * 0.05,
     fontSize: 10,
     color: "gray",
   },

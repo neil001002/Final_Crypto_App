@@ -1,11 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { Home, Market, Settings, NewsScreen } from "../screens";
 import { TabIcon } from "../components";
 import { COLORS, icons } from "../constants";
-
-import { Entypo } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +13,7 @@ const Tabs = () => {
         showLabel: false,
         style: {
           height: 55,
-          backgroundColor: COLORS.primary,
-          borderTopColor: "transparent",
+          backgroundColor: COLORS.white,
         },
       }}
     >
@@ -47,7 +43,7 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({ focused }) => {
             return (
-              <TabIcon focused={focused} icon={icons.trade} label="News" />
+              <TabIcon focused={focused} icon={icons.newsIcon} label="News" />
             );
           },
         }}
@@ -58,7 +54,6 @@ const Tabs = () => {
         options={{
           tabBarIcon: ({ focused }) => {
             return (
-              // <Entypo name="dots-three-vertical" size={24} color="black" />
               <TabIcon
                 focused={focused}
                 icon={icons.profile}

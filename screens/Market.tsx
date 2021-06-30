@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,20 +7,22 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { connect } from "react-redux";
 import { getCoinMarket } from "../stores/marketAPI/marketActions";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
-import { HeaderTab } from "../components";
+import { Ads, HeaderTab } from "../components";
 import GlobalData from "../components/GlobalData";
+import SkeletonContent from 'react-native-skeleton-content';
 
 const Market = ({ getCoinMarket, coins }) => {
+  const [isLoading, setLoading] = useState(true);
   const navigation = useNavigation();
-  useEffect(() => {
-    getCoinMarket();
-  }, []);
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  useEffect(() => {
+    getCoinMarket()
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
@@ -45,23 +47,18 @@ const Market = ({ getCoinMarket, coins }) => {
           }}
         >
           {/* Global data */}
-          <View
-            style={{
-              position: "relative",
-              backgroundColor: "#343333",
-              height: 40,
-            }}
-          >
+          <View>
             <GlobalData />
           </View>
 
-          {/* Top Cryptocurrency */}
+          {/* Display a banner */}
+          <Ads />
+
+          {/* Cryptocurrency */}
           <View
             style={{
               position: "relative",
               margin: 10,
-              // marginVertical: 10,
-              // marginHorizontal: 10,
               backgroundColor: "#FFFFFF",
               borderRadius: 5,
               shadowColor: "rgba(0, 0, 0, 0.25)",
@@ -75,125 +72,143 @@ const Market = ({ getCoinMarket, coins }) => {
               elevation: 6,
             }}
           >
-            <FlatList
-              data={coins}
-              keyExtractor={(item) => item.id}
-              contentContainerStyle={{
-                // paddingVertical: SIZES.padding,
-                // paddingHorizontal: SIZES.padding,
-                margin: 10,
-              }}
-              renderItem={({ item }) => {
-                let priceColor =
-                  item.price_change_percentage_24h == 0
-                    ? COLORS.lightGray3
-                    : item.price_change_percentage_24h > 0
-                    ? COLORS.green
-                    : COLORS.red;
+            {isLoading ? <SkeletonContent
+              containerStyle={{ flex: 1, width: 300 }}
+              isLoading={isLoading}
+              layout={[
+                { key: 'someId1', width: "100%", height: 25, margin: 10 },
+                { key: 'someId2', width: "100%", height: 25, margin: 10 },
+                { key: 'someId3', width: "100%", height: 25, margin: 10 },
+                { key: 'someId4', width: "100%", height: 25, margin: 10 },
+                { key: 'someId5', width: "100%", height: 25, margin: 10 },
+                { key: 'someId6', width: "100%", height: 25, margin: 10 },
+                { key: 'someId7', width: "100%", height: 25, margin: 10 },
+                { key: 'someId8', width: "100%", height: 25, margin: 10 },
+              ]}
+            /> : (
+              <FlatList
+                data={coins}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={{
+                  margin: 10,
+                }}
+                renderItem={({ item }) => {
+                  let priceColor =
+                    item.price_change_percentage_24h == 0
+                      ? COLORS.lightGray3
+                      : item.price_change_percentage_24h > 0
+                        ? COLORS.green
+                        : COLORS.red;
 
-                return (
-                  <TouchableOpacity
-                    style={{
-                      // height: 55,
-                      height: 35,
-                      marginVertical: 10,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    onPress={() =>
-                      navigation.navigate("CoinDetailScreen", {
-                        coin: {
-                          id: item.id,
-                          image: item.image,
-                          name: item.name,
-                          price: item.current_price,
-                          priceChangePer: item.price_change_percentage_24h,
-                          priceChange24h: item.price_change_24h,
-                          symbol: item.symbol,
-                          marketCap: item.market_cap,
-                          marketCapRank: item.market_cap_rank,
-                          sevenDayChart: item.sparkline_in_7d.price,
-                          color: priceColor,
-                          totalVolume: item.total_volume,
-                          dayHigh: item.high_24h,
-                          dayLow: item.low_24h,
-                          marketCapChangeDay: item.market_cap_change_24h,
-                          marketCapChangeDayPer:
-                            item.market_cap_change_percentage_24h,
-                          totalSupply: item.total_supply,
-                        },
-                      })
-                    }
-                  >
-                    {/* Logo */}
-                    <View
+                  return (
+                    <TouchableOpacity
                       style={{
-                        width: 35,
                         height: 35,
+                        marginVertical: 10,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
+                      onPress={() =>
+                        navigation.navigate("CoinDetailScreen", {
+                          coin: {
+                            id: item.id,
+                            image: item.image,
+                            name: item.name,
+                            price: item.current_price,
+                            priceChangePer: item.price_change_percentage_24h,
+                            priceChange24h: item.price_change_24h,
+                            symbol: item.symbol,
+                            marketCap: item.market_cap,
+                            marketCapRank: item.market_cap_rank,
+                            sevenDayChart: item.sparkline_in_7d.price,
+                            color: priceColor,
+                            totalVolume: item.total_volume,
+                            dayHigh: item.high_24h,
+                            dayLow: item.low_24h,
+                            marketCapChangeDay: item.market_cap_change_24h,
+                            marketCapChangeDayPer:
+                              item.market_cap_change_percentage_24h,
+                            totalSupply: item.total_supply,
+                          },
+                        })
+                      }
                     >
-                      <Image
-                        source={{ uri: item.image }}
-                        style={{ flex: 1, resizeMode: "contain" }}
-                      />
-                    </View>
-
-                    {/* Name */}
-
-                    <View style={{ flex: 1, marginLeft: 5 }}>
-                      <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
-                      <Text style={{ ...FONTS.body5 }}>
-                        {item.symbol.toUpperCase()}
-                      </Text>
-                    </View>
-
-                    {/* Figures */}
-
-                    <View>
-                      <Text style={{ textAlign: "right", ...FONTS.h4 }}>
-                        $ {item.current_price}
-                      </Text>
-
+                      {/* Logo */}
                       <View
                         style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "flex-end",
+                          width: 35,
+                          height: 35,
                         }}
                       >
-                        {item.price_change_percentage_24h != 0 && (
-                          <Image
-                            source={icons.upArrow}
-                            style={{
-                              height: 10,
-                              width: 10,
-                              tintColor: priceColor,
-                              transform:
-                                item.price_change_percentage_24h > 0
-                                  ? [{ rotate: "0deg" }]
-                                  : [{ rotate: "180deg" }],
-                            }}
-                          />
-                        )}
+                        <Image
+                          source={{ uri: item.image }}
+                          style={{ flex: 1, resizeMode: "contain" }}
+                        />
+                      </View>
 
-                        <Text
-                          style={{
-                            marginLeft: 5,
-                            color: priceColor,
-                            ...FONTS.body5,
-                            lineHeight: 15,
-                          }}
-                        >
-                          {item.price_change_percentage_24h.toFixed(2)}%
+                      {/* Name */}
+
+                      <View style={{ flex: 1, marginLeft: 5 }}>
+                        <Text style={{ ...FONTS.h3 }}>{item.name}</Text>
+                        <Text style={{ ...FONTS.body5 }}>
+                          {item.symbol.toUpperCase()}
                         </Text>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
+
+                      {/* Figures */}
+
+                      <View>
+                        <Text style={{ textAlign: "right", ...FONTS.h4 }}>
+                          $ {item.current_price}
+                        </Text>
+
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                          }}
+                        >
+                          {item.price_change_percentage_24h != 0 && (
+                            <Image
+                              source={icons.upArrow}
+                              style={{
+                                height: 10,
+                                width: 10,
+                                tintColor: priceColor,
+                                transform:
+                                  item.price_change_percentage_24h > 0
+                                    ? [{ rotate: "0deg" }]
+                                    : [{ rotate: "180deg" }],
+                              }}
+                            />
+                          )}
+
+                          <Text
+                            style={{
+                              marginLeft: 5,
+                              color: priceColor,
+                              ...FONTS.body5,
+                              lineHeight: 15,
+                            }}
+                          >
+                            {item.price_change_percentage_24h.toFixed(2)}%
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            )}
           </View>
+
+          {/* Display a banner */}
+          <View style={{ marginBottom: 10 }}>
+            <Ads />
+          </View>
+
         </View>
       </ScrollView>
     </>

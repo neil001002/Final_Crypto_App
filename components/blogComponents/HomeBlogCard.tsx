@@ -1,5 +1,5 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import React from 'react'
+import React, { useState } from 'react'
 import {
     View,
     Text,
@@ -10,16 +10,20 @@ import {
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import { FONTS, SIZES } from '../../constants';
+import { SIZES } from '../../constants';
 import { getBlog } from '../../stores/blogAPI/blogActions';
+import SkeletonContent from 'react-native-skeleton-content';
 
 const { width, height } = Dimensions.get("window");
 
 const HomeBlogCard = ({ getBlog, blogs }) => {
+    const [isLoading, setLoading] = useState(true);
     const navigation = useNavigation();
+
     useFocusEffect(
         React.useCallback(() => {
-            getBlog();
+            getBlog()
+                .finally(() => setLoading(false));
         }, [])
     )
 
@@ -38,34 +42,44 @@ const HomeBlogCard = ({ getBlog, blogs }) => {
                     Must Read
                 </Text>
             </View>
-            <FlatList
-                data={blogs}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => {
-                    return (
-                        <View style={styles.cardView}>
-                            <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
-                            <Image
-                                style={styles.image}
-                                source={{ uri: item.image }}
-                            />
-                            <TouchableOpacity
-                                onPress={() =>
-                                    navigation.navigate("BlogScreen", {
-                                        blog: {
-                                            title: item.title,
-                                            image: item.image,
-                                            post: item.body,
-                                        }
-                                    })
-                                }
-                            >
-                                <Text style={styles.description} numberOfLines={3}>{item.body}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )
-                }}
-            />
+            {isLoading ? <SkeletonContent
+                containerStyle={{ flex: 1, width: 300 }}
+                isLoading={isLoading}
+                layout={[
+                    { key: 'title', width: "100%", height: 60, margin: 20 },
+                    { key: 'image', width: "100%", height: 120, margin: 20 },
+                    { key: 'description', width: "100%", height: 60, margin: 20 },
+                ]}
+            /> : (
+                <FlatList
+                    data={blogs.slice(0, 3)}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => {
+                        return (
+                            <View style={styles.cardView}>
+                                <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
+                                <Image
+                                    style={styles.image}
+                                    source={{ uri: item.image }}
+                                />
+                                <TouchableOpacity
+                                    onPress={() =>
+                                        navigation.navigate("BlogScreen", {
+                                            blog: {
+                                                title: item.title,
+                                                image: item.image,
+                                                post: item.body,
+                                            }
+                                        })
+                                    }
+                                >
+                                    <Text style={styles.description} numberOfLines={3}>{item.body}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    }}
+                />
+            )}
         </View>
     )
 }
@@ -80,7 +94,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 0.5 },
         shadowOpacity: 0.5,
         shadowRadius: 3,
-        // borderWidth: 0.3,
     },
     title: {
         marginHorizontal: width * 0.05,
@@ -95,12 +108,6 @@ const styles = StyleSheet.create({
         color: "gray",
         fontSize: SIZES.h3,
     },
-    // readMore: {
-    //   color: "gray",
-    //   fontSize: 18,
-    //   marginVertical: width * 0.05,
-    //   fontWeight: "bold",
-    // },
     image: {
         height: height / 5,
         marginLeft: width * 0.05,

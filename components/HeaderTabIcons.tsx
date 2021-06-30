@@ -8,13 +8,13 @@ import { useNavigation } from '@react-navigation/native';
 
 const HeaderTabIcons = ({ title }) => {
     const navigation = useNavigation();
-    // const URL = "HI";
+    const URL = "https://bit.ly/2UcPVpl";
 
     const onShare = async () => {
         try {
             const result = await Share.share({
                 message:
-                    "This is shared via Cryptonium. \n\nYour all in one crypto app.",
+                    `🌟This is shared via Cryptonium.🌟\n\nCryptonium is a data aggregator app for all cryptocurrency data around the globe. You will get cryptocurrency price data, news, and much more.\n\nSo what are you waiting for, download Cryptonium today.👇👇\n\nAndroid - ${URL}\n\nYour all in one crypto app.`,
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
@@ -70,7 +70,7 @@ const HeaderTabIcons = ({ title }) => {
             <View>
                 <Text style={{
 
-                    ...FONTS.largeTitle,
+                    ...FONTS.h2,
                 }}>{title}</Text>
             </View>
 

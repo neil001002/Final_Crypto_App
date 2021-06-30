@@ -19,16 +19,12 @@ const HomeHeader = () => {
             width: "100%",
             resizeMode: "contain",
             opacity: 0.8,
-            // marginTop: SIZES.padding,
-            // borderWidth: 1,
           }}
         />
       </View>
       <View style={{
-        // margin: SIZES.padding,
         alignItems: "center",
         justifyContent: "center",
-        // borderWidth: 1
       }}>
         <Image source={require("../assets/undrawHomePage.png")}
           style={{
@@ -36,8 +32,6 @@ const HomeHeader = () => {
             width: '100%',
             resizeMode: "contain",
             opacity: 0.8,
-            // marginTop: SIZES.padding,
-            // borderWidth: 1,
           }}
         />
       </View>

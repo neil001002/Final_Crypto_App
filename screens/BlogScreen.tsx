@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, Image, Dimensions } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { HeaderTabIcons } from '../components'
-import { COLORS, FONTS, SIZES } from '../constants'
+import { Ads, HeaderTabIcons } from '../components'
+import { COLORS, SIZES } from '../constants'
 
 const { width, height } = Dimensions.get("window");
 
@@ -31,7 +31,7 @@ const BlogScreen = ({ route }) => {
                     }}
                 >
                     <View>
-                        <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>{route.params.blog.title}</Text>
+                        <Text style={{ fontWeight: "600", fontSize: SIZES.h1 }}>{route.params.blog.title}</Text>
                     </View>
 
                     <View>
@@ -45,10 +45,13 @@ const BlogScreen = ({ route }) => {
                     </View>
 
                     <View>
-                        <Text style={{ fontWeight: "600", fontSize: SIZES.h2 }}>{route.params.blog.post}</Text>
+                        <Text style={{ fontWeight: "600" }}>{route.params.blog.post}</Text>
                     </View>
                 </View>
             </ScrollView >
+
+            {/* Display a banner */}
+            <Ads />
         </>
     )
 }

@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// holdings / My holdings
-
-// coin market
-
 export const GET_COIN_CHART_BEGIN = "GET_COIN_CHART_BEGIN";
 export const GET_COIN_CHART_SUCCESS = "GET_COIN_CHART_SUCCESS";
 export const GET_COIN_CHART_FAILURE = "GET_COIN_CHART_FAILURE";

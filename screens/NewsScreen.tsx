@@ -1,37 +1,78 @@
-import React from "react";
-import { View, Text, ScrollView, SafeAreaView, StatusBar } from "react-native";
-import { HeaderTab } from "../components";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import React, { useState, useEffect } from "react";
+import { View, FlatList, ScrollView } from "react-native";
+import { connect } from "react-redux";
+import SkeletonContent from 'react-native-skeleton-content';
+import { useFocusEffect } from "@react-navigation/native";
+import { getCoinNews } from "../stores/newsCryptoAPI/newsActions";
+import { HeaderTab, NewsCard } from "../components";
 
-import Tab1 from "./news_tabs/Tab1";
-import Tab2 from "./news_tabs/Tab2";
-import Tab3 from "./news_tabs/Tab3";
-import { COLORS } from "../constants";
+const Tab1 = ({ getCoinNews, coinsnews }) => {
+  const [isLoading, setLoading] = useState(true);
 
-const Tab = createMaterialTopTabNavigator();
+  useFocusEffect(
+    React.useCallback(() => {
+      const ID = "crypto OR blockchain OR elon OR vitalik OR defi OR nft";
+      getCoinNews({ ID })
+        .finally(() => setLoading(false));
+    }, [])
+  );
 
-//Top tabs navigation for new tabs
-const NewsScreen = () => {
   return (
     <>
-      <StatusBar hidden />
-      <View>
-        <HeaderTab title={"News"} />
-      </View>
-      <Tab.Navigator
-        tabBarOptions={{
-          style: {
-            backgroundColor: COLORS.white,
-            justifyContent: "space-between",
-          },
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          width: "100%",
+          zIndex: 1,
         }}
       >
-        <Tab.Screen name="Trending" component={Tab1} />
-        <Tab.Screen name="Bitcoin" component={Tab2} />
-        <Tab.Screen name="Ethereum" component={Tab3} />
-      </Tab.Navigator>
+        <HeaderTab title={"News"} />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View
+          style={{
+            position: "relative",
+            backgroundColor: "white",
+            marginTop: 50,
+          }}
+        >
+          {isLoading ? <SkeletonContent
+            containerStyle={{ flex: 1, width: 300 }}
+            isLoading={isLoading}
+            layout={[
+              { key: 'title', width: "100%", height: 60, margin: 20 },
+              { key: 'image', width: "100%", height: 120, margin: 20 },
+              { key: 'description', width: "100%", height: 60, margin: 20 },
+            ]}
+          /> : (
+            <FlatList
+              data={coinsnews.articles}
+              keyExtractor={(item, index) => "key" + index}
+              renderItem={({ item }) => {
+                return <NewsCard item={item} />;
+              }}
+            />
+          )}
+        </View>
+      </ScrollView>
     </>
   );
 };
 
-export default NewsScreen;
+function mapStateToProps(state) {
+  return {
+    coinsnews: state.newsReducer.coinsnews,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getCoinNews: (ID) => {
+      return dispatch(getCoinNews(ID));
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tab1);

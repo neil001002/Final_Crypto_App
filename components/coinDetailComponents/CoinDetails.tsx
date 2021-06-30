@@ -14,7 +14,6 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
                     flexDirection: 'row',
                     alignItems: "center",
                     justifyContent: "space-between",
-                    // borderWidth: 1,
 
                 }}
             >
@@ -23,7 +22,6 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
                     style={{
                         width: 50,
                         height: 50,
-                        // borderWidth: 1
                     }}
                 >
                     <Image
@@ -39,9 +37,9 @@ const CoinDetails = ({ image, name, price, priceChangePer, symbol, color }) => {
                     <Text style={{ fontSize: SIZES.h4 }}>{symbol}</Text>
                 </View>
 
-                <View>
+                {/* <View>
                     <AntDesign name="star" size={35} color="black" />
-                </View>
+                </View> */}
 
             </View>
 

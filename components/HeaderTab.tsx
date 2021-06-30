@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-import { COLORS, SIZES, FONTS } from "../constants";
+import { SIZES, FONTS } from "../constants";
 
 const HeaderTab = ({ title }) => {
   return (
@@ -19,24 +19,15 @@ const HeaderTab = ({ title }) => {
         shadowRadius: 15,
         borderBottomStartRadius: 10,
         borderBottomEndRadius: 10,
-        // flexDirection: "row",
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      {/* <Image
-        source={require("../assets/cryptoniumLogo.png")}
-        resizeMode="contain"
-        style={{
-          flex: 1,
-          borderWidth: 1,
-          //   alignSelf: "flex-start",
-        }}
-      /> */}
       <Text
         style={{
-          flex: 1,
-          justifyContent: "center",
-          textAlign: "center",
-          ...FONTS.largeTitle,
+          ...FONTS.h1,
         }}
       >
         {title}

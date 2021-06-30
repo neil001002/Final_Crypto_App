@@ -46,7 +46,7 @@ const CoinDetailSeconCard = ({
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: "400", fontSize: SIZES.h3, padding: 3 }}>Market Cap </Text>
-                    <Text style={{ fontWeight: "300" }}>{marketCap}</Text>
+                    <Text style={{ fontWeight: "300" }}>$ {marketCap}</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -56,17 +56,17 @@ const CoinDetailSeconCard = ({
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: "400", fontSize: SIZES.h3, padding: 3 }}>24H High </Text>
-                    <Text style={{ fontWeight: "300" }}>{dayHigh}</Text>
+                    <Text style={{ fontWeight: "300" }}>$ {dayHigh}</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: "400", fontSize: SIZES.h3, padding: 3 }}>24H Low</Text>
-                    <Text style={{ fontWeight: "300" }}>{dayLow}</Text>
+                    <Text style={{ fontWeight: "300" }}>$ {dayLow}</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ fontWeight: "400", fontSize: SIZES.h3, padding: 3 }}>Market Cap Change 24H </Text>
-                    <Text style={{ fontWeight: "300" }}>{marketCapChangeDay.toFixed(2)}</Text>
+                    <Text style={{ fontWeight: "300" }}>$ {marketCapChangeDay.toFixed(2)}</Text>
                 </View>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>

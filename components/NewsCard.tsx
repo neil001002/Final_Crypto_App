@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import moment from "moment";
@@ -15,10 +14,7 @@ const { width, height } = Dimensions.get("window");
 
 const NewsCard = ({ item }) => {
   const time = moment(item.publishedAt || moment.now()).fromNow();
-
   const navigation = useNavigation();
-
-  // const defaultImage = require("../assets/icons/briefcase.png");
 
   return (
     <View style={styles.cardView}>

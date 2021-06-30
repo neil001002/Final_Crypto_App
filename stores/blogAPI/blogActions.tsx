@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// holdings / My holdings
-
-// coin market
-
 export const GET_BLOG_BEGIN = "GET_BLOG_BEGIN";
 export const GET_BLOG_SUCCESS = "GET_BLOG_SUCCESS";
 export const GET_BLOG_FAILURE = "GET_BLOG_FAILURE";

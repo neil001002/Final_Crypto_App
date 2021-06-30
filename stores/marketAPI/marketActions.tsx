@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// holdings / My holdings
-
-// coin market
-
 export const GET_COIN_MARKET_BEGIN = "GET_COIN_MARKET_BEGIN";
 export const GET_COIN_MARKET_SUCCESS = "GET_COIN_MARKET_SUCCESS";
 export const GET_COIN_MARKET_FAILURE = "GET_COIN_MARKET_FAILURE";
@@ -27,7 +23,7 @@ export function getCoinMarket(
   orderBy = "market_cap_desc",
   sparkline = true,
   priceChangePerc = "7d",
-  perPage = 50,
+  perPage = 100,
   page = 1
 ) {
   return (dispatch) => {

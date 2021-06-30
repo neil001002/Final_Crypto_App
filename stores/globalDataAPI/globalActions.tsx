@@ -1,9 +1,5 @@
 import axios from "axios";
 
-// holdings / My holdings
-
-// coin market
-
 export const GET_GLOBAL_BEGIN = "GET_GLOBAL_BEGIN";
 export const GET_GLOBAL_SUCCESS = "GET_GLOBAL_SUCCESS";
 export const GET_GLOBAL_FAILURE = "GET_GLOBAL_FAILURE";
